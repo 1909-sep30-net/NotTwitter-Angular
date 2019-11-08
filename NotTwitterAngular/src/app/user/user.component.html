@@ -1,11 +1,30 @@
 
 <h1>{{title}} </h1>
-<!-- <form>
-  First name: <input type="text" name="fname" value="fname"><br>
-  <input type="submit" value="Submit" (onSubmit)="getUserByName(fname)">
+
+<mat-form-field (ngSubmit)='getUserByName($event)' color='primary' id='search-input' class='full-width' appearance='outline'>
+  <mat-label color='red'>Search</mat-label>
+  <input #searchBar matInput  [(ngModel)]='name' name='searchBar' [value]='name' (keyup.enter)='getUserByName(name)'>
+</mat-form-field>
+
+<!-- <div class="fields-container">
+  <mat-form-field>
+    <input matInput placeholder="Input">
+  </mat-form-field>
+</div> -->
+
+<button mat-raised-button color="primary" (click)='getUserByName(searchValue)' id='submit-search' type='submit' for='searchBar'>Submit</button>
+
+<!-- 
+<form #f="ngForm" (ngSubmit)="getUserByName(f)" novalidate>
+  <input name="first" ngModel required #first="ngModel">
+  <button>Submit</button>
 </form> -->
-<h1>Users with name {{name}}</h1>
+
+<!-- <h1 (click)="getUserByName(name)">clickmeinstead</h1>
+<h1>Users with name {{name}}</h1> -->
+
 <h3>List of Users: </h3>
+<div *ngIf = "users">
 <table>
   <tr>
     <th>id</th>
@@ -17,7 +36,7 @@
     <th>gender</th>
   </tr>
 
-  <tr {{getUserByName({{name}}) *ngFor = "let us of Users">
+  <tr *ngFor = "let us of users">
     <td>{{us.id}}</td>
     <td>{{us.firstName}}</td>
     <td>{{us.lastName}}</td>
@@ -27,5 +46,6 @@
     <td>{{us.gender}}</td>
   </tr>
 </table>
+</div>
 
 

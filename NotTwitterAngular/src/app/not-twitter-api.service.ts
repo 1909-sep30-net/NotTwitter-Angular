@@ -12,7 +12,7 @@ export class NotTwitterAPIService {
   constructor(private httpClient: HttpClient) { }
 
   getUsersByName(name:string): Promise<UserModel[]>{
-    let url = `${environment.notTwitterApiBaseUrl}/api​/User​/name​/${name}`;
+    const url = `${environment.notTwitterApiBaseUrl}/api/User/name/${name}`;
     return this.httpClient.get<UserModel[]>(url).toPromise();
 
     // Different approach to setting parameters into http (method header: getUsersByName():Observable<any>)
