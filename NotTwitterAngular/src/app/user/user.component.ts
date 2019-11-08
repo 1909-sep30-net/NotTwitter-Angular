@@ -13,8 +13,8 @@ export class UserComponent implements OnInit {
   name = 'String'
   users: UserModel[];
 
-  getUserByName(name:string): void{
-   this.NotTwitterApi.getUsersByName(name).then(users => this.users = users);
+  getUserByName(): void{
+   this.NotTwitterApi.getUsersByName().then(users => this.users = users);
   }
 
 
