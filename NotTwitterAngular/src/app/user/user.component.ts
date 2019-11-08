@@ -13,7 +13,7 @@ export class UserComponent implements OnInit {
   name = 'String'
   users: UserModel[];
 
-  getUserByName(name:string): void{
+  getUserByName(name): void{
    this.NotTwitterApi.getUsersByName(name).then(users => this.users = users);
   }
 
@@ -23,6 +23,8 @@ export class UserComponent implements OnInit {
   ngOnInit() {
     //different approach from guy in video
     // this.NotTwitterApi.getUsersByName().subscribe(users => this.users = users);
+     this.NotTwitterApi.getUsersByName("String").then(users => this.users = users);
+    }
+  
   }
 
-}

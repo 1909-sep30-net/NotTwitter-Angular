@@ -17,7 +17,7 @@
     <th>gender</th>
   </tr>
 
-  <tr *ngFor = "let us of Users">
+  <tr {{getUserByName({{name}}) *ngFor = "let us of Users">
     <td>{{us.id}}</td>
     <td>{{us.firstName}}</td>
     <td>{{us.lastName}}</td>
