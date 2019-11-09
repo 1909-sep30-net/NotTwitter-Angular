@@ -14,9 +14,6 @@ export class UsersComponent implements OnInit {
   constructor(public rest:RestService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
-    this.rest.getUserByUsername(this.route.snapshot.params['name']).subscribe((data: {}) => {
-      console.log(data);
-      this.user = data;
-    });
+
   }
 }

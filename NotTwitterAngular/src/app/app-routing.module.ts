@@ -1,30 +1,34 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { InterceptorService } from './interceptor.service';
 
+import { AuthGuard } from './auth.guard';
 import {NavbarComponent} from './components/navbar/navbar.component'
-import { FormsModule } from '@angular/forms';
 import { UsersComponent } from './components/users/users.component';
 
 const routes: Routes = [
   {
-    path: 'user',
+    path: `user`,
     component: UsersComponent,
-    data: { title: 'User Profile' }
+    canActivate: [AuthGuard]
   },
   {
     path:'nav',
     component: NavbarComponent,
-    
   }
 ];
 
 @NgModule({
-  imports: [
-    BrowserModule,
-    RouterModule.forRoot(routes),
-    FormsModule
-  ],
-  exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorService,
+      multi: true
+    }
+  ]
 })
 export class AppRoutingModule { }
