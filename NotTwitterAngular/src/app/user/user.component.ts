@@ -16,7 +16,7 @@ export class UserComponent implements OnInit {
   getUserByName(name:string): void{
    this.NotTwitterApi.getUsersByName(name).then(users => this.users = users);
   }
-
+  
 
   constructor(private NotTwitterApi: NotTwitterAPIService) { }
 
