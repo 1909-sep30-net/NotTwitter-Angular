@@ -10,13 +10,18 @@ import UserModel from '../../models/user-model';
 
 export class UserComponent implements OnInit {
   //using name to do a simple test if getUsersByName(String) works
-  name = ''
+  name = '';
+  id = 0;
+
   users: UserModel[];
+  iduser: UserModel;
 
   getUserByName(name:string): void{
    this.NotTwitterApi.getUsersByName(name).then(users => this.users = users);
   }
-  
+  getUserById(id:number): void{
+    this.NotTwitterApi.getUsersById(id).then(user => this.iduser = user);
+   }
 
   constructor(private NotTwitterApi: NotTwitterAPIService) { }
 

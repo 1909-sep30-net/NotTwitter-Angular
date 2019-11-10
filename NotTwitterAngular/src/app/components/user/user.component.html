@@ -1,11 +1,23 @@
 
 <h1>{{title}} </h1>
 
-<mat-form-field (ngSubmit)='getUserByName($event)' color='primary' id='search-input' class='full-width' appearance='outline'>
+<!-- <mat-form-field (ngSubmit)='getUserByName($event)' color='primary' id='search-input' class='full-width' appearance='outline'>
   <mat-label color='red'>Search</mat-label>
   <input #searchBar matInput  [(ngModel)]='name' name='searchBar' [value]='name' (keyup.enter)='getUserByName(name)'>
+</mat-form-field> -->
+
+<mat-form-field (ngSubmit)='getUserById($event)' color='primary' id='search-input' class='full-width' appearance='outline'>
+  <mat-label color='red'>Search</mat-label>
+  <input #searchBar matInput  [(ngModel)]='id' name='searchBar' [value]='id' (keyup.enter)='getUserById(id)'>
 </mat-form-field>
 
+<!-- <div *ngIf = "iduser">
+{{idUser.firstName}}
+{{idUser.lastName}}
+{{idUser.email}}
+{{idUser.password}}
+{{idUser.friends}}
+</div> -->
 <!-- <div class="fields-container">
   <mat-form-field>
     <input matInput placeholder="Input">
@@ -24,7 +36,7 @@
 <h1>Users with name {{name}}</h1> -->
 
 <h3>List of Users: </h3>
-<div *ngIf = "users">
+<div *ngIf ="iduser">
 <table>
   <tr>
     <th>id</th>
@@ -36,14 +48,15 @@
     <th>gender</th>
   </tr>
 
-  <tr *ngFor = "let us of users">
-    <td>{{us.id}}</td>
-    <td>{{us.firstName}}</td>
-    <td>{{us.lastName}}</td>
-    <td>{{us.username}}</td>
-    <td>{{us.password}}</td>
-    <td>{{us.email}}</td>
-    <td>{{us.gender}}</td>
+  <tr>
+    <td>{{iduser.id}}</td>
+    <td>{{iduser.firstName}}</td>
+    <td>{{iduser.lastName}}</td>
+    <td>{{iduser.username}}</td>
+    <td>{{iduser.password}}</td>
+    <td>{{iduser.email}}</td>
+    <td>{{iduser.gender}}</td>
+    <td>{{iduser.friends}}</td>
   </tr>
 </table>
 </div>

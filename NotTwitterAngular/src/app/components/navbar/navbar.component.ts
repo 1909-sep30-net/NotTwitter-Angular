@@ -19,6 +19,10 @@ export class NavbarComponent implements OnInit {
       return this.apiService.user;
     }
 
+    userId(){
+      return this.apiService.user.id;
+    }
+
   ngOnInit() {
   }
 

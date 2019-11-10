@@ -1,1 +1,50 @@
-<p>friend-request works!</p>
+<!-- <mat-form-field (ngSubmit)='getUserFriends($event)' color='primary' id='search-input' class='full-width' appearance='outline'>
+        <mat-label color='red'>Search</mat-label>
+        <input #searchBar matInput  [(ngModel)]='id' name='searchBar' [value]='id' (keyup.enter)='getUserFriends(id)'>
+</mat-form-field> -->
+    
+<h2>Friends: </h2>
+{{getUserFriends()}}
+<div *ngIf ="user">
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <tr *ngFor = "let friend of user.friends">
+    <td>{{friend.firstName}} {{friend.lastName}}</td>
+    <td> <button mat-button>Go to Profile</button> </td>    
+    <td><button mat-button>Remove friend</button></td> 
+    </tr>
+</table>
+
+
+<h2>Friends Requests: </h2>
+{{getUserFriendRequests()}}
+
+<table>
+        <tr>
+          <th>Name</th>
+          <th></th>
+          <th></th>
+        </tr>
+      
+        <tr *ngFor = "let friend of userFriendRequests">
+          <td>{{friend.firstName}} {{friend.lastName}}</td>
+          <td> <button mat-button (click) = "acceptFriendRequest()">Confirm</button> </td>    
+          <td><button mat-button (click) = "declineFriendRequest()">Decline</button></td> 
+          </tr>
+      </table>
+</div>
+
+
+
+<!-- for loop to display friends of user (UserModel has a friends array which we are trying to access and print each friend name)  -->
+
+<!-- <ul *ngFor = "let friend of friends">
+    <li>{{friend.FirstName}}</li>
+    <li>{{friend.LastName}}</li>
+</ul> -->
