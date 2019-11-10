@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { RestService } from '../../rest/rest.service';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import {NotTwitterAPIService} from '../../not-twitter-api.service';
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
@@ -11,7 +10,7 @@ export class UsersComponent implements OnInit {
 
   user:any;
 
-  constructor(public rest:RestService, private route: ActivatedRoute, private router: Router) { }
+  constructor(public rest:NotTwitterAPIService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
 
