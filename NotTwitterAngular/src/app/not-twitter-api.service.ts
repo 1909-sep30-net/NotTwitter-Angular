@@ -135,7 +135,7 @@ export class NotTwitterAPIService {
 
   updateComment(commentId: number, commentModel:CommentModel){
     const url = `${environment.notTwitterApiBaseUrl}/api/Comment/${commentId}`;
-    return this.httpClient.put<CommentModel>(url, {commentId,commentModel}).toPromise
+    return this.httpClient.put<CommentModel>(url, {commentId,commentModel}).toPromise();
   }
 
   //API parameters for delete comment seem to require both postId and a postModel. However httpclient.delete only allows for url and options. 
