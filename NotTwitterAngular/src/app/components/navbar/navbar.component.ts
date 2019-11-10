@@ -1,6 +1,7 @@
 import { Component, OnInit, EventEmitter, Output  } from '@angular/core';
 import { AuthService } from '../../auth.service';
 import { NotTwitterAPIService} from '../../not-twitter-api.service';
+import navbarItem from 'src/app/models/navbar-item-model';
 
 
 @Component({
