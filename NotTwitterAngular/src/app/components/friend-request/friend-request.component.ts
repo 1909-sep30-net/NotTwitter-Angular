@@ -10,9 +10,11 @@ import UserModel from 'src/app/models/user-model';
 })
 export class FriendRequestComponent implements OnInit {
   //get the users friends, display their names, display friend requests and friend requests time sent , friend request status
+  //it needs to handle accepting or declining requests.
   user : UserModel;
   userFriends: UserModel[];
   friendRequests: FriendRequestModel [];
+  friendRequestStatus = ['pending', 'accepted', 'declined'];
 
   getUserFriends(id: number){
     this.NotTwitterAPI.getUsersById(id).then(user => this.user = user);    
@@ -28,6 +30,18 @@ export class FriendRequestComponent implements OnInit {
       //after that, in html I need to display just the name properties of such users in the array
     }
   }
+
+  acceptFriendRequest(friendRequest:FriendRequestModel){
+    this.NotTwitterAPI.acceptRequest(friendRequest);
+  }
+
+  declineFriendRequest(friendRequest:FriendRequestModel){
+    this.NotTwitterAPI.declineRequest(friendRequest);
+  }
+
+  // friendshipStatus(){
+   
+  // }
 
   constructor(private NotTwitterAPI: NotTwitterAPIService) { }
 
