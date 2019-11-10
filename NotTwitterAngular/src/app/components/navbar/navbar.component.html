@@ -3,4 +3,10 @@
     <button (click)="auth.logout()" *ngIf="auth.loggedIn">Log Out</button>
     <span *ngIf="user"> Welcome Back: {{ user.username }} </span>
     <a routerLink="user" *ngIf="auth.loggedIn && !user">Create New Social Info</a>  
+
+    <ul class="navbar">
+      <li *ngFor="let page of pages" (click)="onSelect(page)">
+          <span class="badge">{{page.title}}</span>
+      </li>
+  </ul>
   </header>

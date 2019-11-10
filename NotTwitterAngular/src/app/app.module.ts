@@ -6,7 +6,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { UsersComponent } from './components/users/users.component';
-import { HomeComponent } from './components/home/home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { FormsModule } from '@angular/forms';
@@ -27,7 +26,6 @@ import { CommentComponent } from './components/comment/comment.component';
     AppComponent,
     NavbarComponent,
     UsersComponent,
-    HomeComponent,
 
     UserComponent,
     PostComponent,

@@ -112,16 +112,6 @@ export class NotTwitterAPIService {
     const url = `${environment.notTwitterApiBaseUrl}/api/Post/${postId}}`;
     return this.httpClient.delete(url).toPromise();
   }
-<<<<<<< HEAD
-  // getUsersByName(name:string): Promise<UserModel[]>{
-  //   let url = `${environment.notTwitterApiBaseUrl}/api​/User​/name​/${name}`;
-  //   return this.httpClient.get<UserModel[]>(url).toPromise();
-
-    // Different approach to setting parameters into http (method header: getUsersByName():Observable<any>)
-    // let params1 = new HttpParams().set("name", "String");
-    // return this.httpClient.get("http://localhost:44381/api/User/name", {params:params1});
-  //}
-=======
 
 
   /*
@@ -180,7 +170,6 @@ export class NotTwitterAPIService {
     return this.httpClient.post<PostModel>(url, friendRequest).toPromise();
   }
 
->>>>>>> 0b8b2ea9e031e23b1d97d8123a211c0929dba389
 }
 
 
