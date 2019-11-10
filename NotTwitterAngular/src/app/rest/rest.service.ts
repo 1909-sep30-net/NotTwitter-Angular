@@ -45,6 +45,12 @@ export class RestService {
       const url = `${this.userEndpoint}/api/user/email/${email}`;
       return this.httpClient.get<Users>(url).toPromise();
     }
+
+    getUsersByName(name: string): Promise<Users> {
+      const url = `${this.userEndpoint}/api/User/${name}`;
+      return this.httpClient.get<Users>(url).toPromise();
+    }
+
     createUser(user: UserCreate): Promise<Users> {
       const url = `${this.userEndpoint}/api/user`;
       return this.httpClient.post<Users>(url, user).toPromise();
