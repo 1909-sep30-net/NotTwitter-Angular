@@ -1,1 +1,10 @@
 <p>post works!</p>
+
+<app-comment *ngFor="let comment of comments" [model] = "comment"></app-comment>
+<ul class="comments">
+    <li
+        *ngFor="let comment of comments"
+    >
+        <app-comment [model]></app-comment>
+    </li>
+</ul>

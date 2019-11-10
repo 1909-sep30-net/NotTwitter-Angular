@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import CommentModel from 'src/app/models/comment-model';
+import { NotTwitterAPIService } from 'src/app/not-twitter-api.service';
 
 @Component({
   selector: 'app-post',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PostComponent implements OnInit {
 
-  constructor() { }
+  constructor(private NotTwitterService:NotTwitterAPIService) { }
 
   ngOnInit() {
+
   }
+
+  comments:CommentModel[];
 
 }
