@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment.prod';
 import UserModel from './models/user-model';
 import PostModel from './models/post-model';
 import UserModelCreate from './models/user-model-create';
 import UserModelUpdate from './models/user-model-update';
-import PostModelCreate from './models/post-model-create';
+
 import CommentModel from './models/comment-model';
-import FriendModel from './models/friend-model';
+
 import FriendRequestModel from './models/friendrequest-model';
+import { AuthService } from './auth.service';
 
 
 @Injectable({
@@ -19,8 +20,28 @@ import FriendRequestModel from './models/friendrequest-model';
 If PUT/POST requests not workinh as inteded, might have to create models with specific values for each of the controller calls
 */
 export class NotTwitterAPIService {
+  user: UserModel = null;
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(
+    private httpClient : HttpClient,
+    auth: AuthService
+    ) {
+      auth.userProfile$.subscribe(data =>{
+         if(data){
+          this.getUserByEmail(data.email).catch((err: HttpErrorResponse) => {
+            if (err.status === 404) {
+              // user does not exist, create
+              throw err;
+            } else {
+              throw err;
+            }
+          }).then(apiUser => {
+            this.user = apiUser;
+          });
+         } 
+      });
+      
+    }
 
   /*
   User Controller Functionality
@@ -28,6 +49,11 @@ export class NotTwitterAPIService {
   getUsersByName(name:string): Promise<UserModel[]>{
     const url = `${environment.notTwitterApiBaseUrl}/api/User/name/${name}`;
     return this.httpClient.get<UserModel[]>(url).toPromise();
+  }
+
+  getUserByEmail(email: string): Promise<UserModel> {
+    const url = `${environment.notTwitterApiBaseUrl}/api/user/email/${email}`;
+    return this.httpClient.get<UserModel>(url).toPromise();
   }
 
   getUsersById(id:number): Promise<UserModel>{
