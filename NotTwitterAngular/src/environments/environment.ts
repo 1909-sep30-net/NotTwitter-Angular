@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  notTwitterApiBaseUrl: 'https://localhost:44381',
+  notTwitterBaseUrl: "https://localhost:44381",
   production: false
 };
 
