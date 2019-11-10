@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NotTwitterAPIService } from '../not-twitter-api.service';
-import UserModel from '../models/user-model';
+import { NotTwitterAPIService } from '../../not-twitter-api.service';
+import UserModel from '../../models/user-model';
 
 @Component({
   selector: 'app-user',
