@@ -18,6 +18,7 @@ import { UserComponent } from './components/user/user.component';
 import { PostComponent } from './components/post/post.component';
 import { FriendRequestComponent } from './components/friend-request/friend-request.component';
 import { CommentComponent } from './components/comment/comment.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 // /import { FridgeComponent } from './fridge/fridge.component';
@@ -31,6 +32,7 @@ import { CommentComponent } from './components/comment/comment.component';
     PostComponent,
     CommentComponent,
     FriendRequestComponent,
+    DashboardComponent,
   ],
   imports: [
     AppRoutingModule,

@@ -1,10 +1,17 @@
-<p>post works!</p>
-
-<app-comment *ngFor="let comment of comments" [model] = "comment"></app-comment>
-<ul class="comments">
-    <li
-        *ngFor="let comment of comments"
-    >
-        <app-comment [model]></app-comment>
-    </li>
-</ul>
+<div class="post" *ngIf="author">
+    <h6>{{author.username}}</h6>
+    <br>
+    <h2>{{model.text}}</h2>
+</div>
+<div *ngIf="model.comments">
+    <ul class="comments">
+        <div
+            *ngFor="let comment of model.comments"
+        >
+            <app-comment [model] = "comment"></app-comment>
+    </div>
+    </ul>
+    <label> Write Comment:
+        <input placeholder="Have something to add?">
+    </label>
+</div>

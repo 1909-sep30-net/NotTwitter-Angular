@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NotTwitterAPIService } from 'src/app/not-twitter-api.service';
 import CommentModel from 'src/app/models/comment-model';
+import UserModel from 'src/app/models/user-model';
 
 @Component({
   selector: 'app-comment',
@@ -9,16 +10,24 @@ import CommentModel from 'src/app/models/comment-model';
 })
 export class CommentComponent implements OnInit {
 
-  getAuthorName(){
+  author:UserModel=null;
+  loaded:boolean=false;
+
+  loadComment():void{
+    this.NotTwitterService.getUsersById(this.model.userId).then(user=>this.author = user);
+    this.loaded = true;
   }
-  
+
+  @Input() model: CommentModel;
+
   constructor(
-    private apiService: NotTwitterAPIService
+    private NotTwitterService: NotTwitterAPIService
   ) { }
 
   ngOnInit() {
+    this.loadComment();
+    console.log(this.model);
   }
 
-  @Input()model: CommentModel;
 
 }

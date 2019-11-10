@@ -26,13 +26,13 @@ export class NavbarComponent implements OnInit {
     ) { }
 
   get user() {
-    console.log(this.apiService.user);
+    //console.log(this.apiService.user);
     return this.apiService.user;
   }
 
   onSelect(page:navbarItem){
     this.selectedPage = page;
-    console.log(this.selectedPage.title);
+    //console.log(this.selectedPage.title);
   }
 
   ngOnInit() {

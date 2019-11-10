@@ -57,12 +57,12 @@ export class NotTwitterAPIService {
   }
 
   getUsersById(id:number): Promise<UserModel>{
-    const url = `${environment.notTwitterApiBaseUrl}/api/User/${id}`;
+    const url = `${environment.notTwitterApiBaseUrl}/api/User/${this.user.id}`;
     return this.httpClient.get<UserModel>(url).toPromise();
   }
 
   getFriendPosts(id:number): Promise<PostModel[]>{
-    const url = `${environment.notTwitterApiBaseUrl}/api/User/friendposts/${id}`;
+    const url = `${environment.notTwitterApiBaseUrl}/api/User/friendposts/${this.user.id}`;
     return this.httpClient.get<PostModel[]>(url).toPromise();
   }
 
