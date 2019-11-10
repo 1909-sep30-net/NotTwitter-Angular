@@ -5,20 +5,14 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { InterceptorService } from './interceptor.service';
 
 import { AuthGuard } from './auth.guard';
-import {NavbarComponent} from './components/navbar/navbar.component'
-import { UsersComponent } from './components/users/users.component';
 
 const routes: Routes = [
-  {
-    path: `user`,
-    component: UsersComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path:'nav',
-    component: NavbarComponent,
+  { path: ``, 
+    redirectTo: ``, 
+    pathMatch: `full`,
+    canActivate: [AuthGuard] 
   }
-];
+]
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

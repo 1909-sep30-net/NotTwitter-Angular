@@ -18,7 +18,10 @@ import { UserComponent } from './components/user/user.component';
 import { PostComponent } from './components/post/post.component';
 import { FriendRequestComponent } from './components/friend-request/friend-request.component';
 import { CommentComponent } from './components/comment/comment.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { ListFriendsComponent } from './components/list-friends/list-friends.component';
+import { ListPostsComponent } from './components/list-posts/list-posts.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 
 // /import { FridgeComponent } from './fridge/fridge.component';
@@ -32,6 +35,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     PostComponent,
     CommentComponent,
     FriendRequestComponent,
+    ListFriendsComponent,
+    ListPostsComponent,
+    UserProfileComponent,
     DashboardComponent,
   ],
   imports: [

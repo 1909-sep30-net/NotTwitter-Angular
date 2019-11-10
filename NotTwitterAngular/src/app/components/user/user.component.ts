@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NotTwitterAPIService } from '../../not-twitter-api.service';
 import UserModel from '../../models/user-model';
+import { AuthService } from 'src/app/auth.service';
 
 @Component({
   selector: 'app-user',
@@ -9,20 +10,28 @@ import UserModel from '../../models/user-model';
 })
 
 export class UserComponent implements OnInit {
-  //using name to do a simple test if getUsersByName(String) works
-  name = ''
-  users: UserModel[];
-
+  users: UserModel[] = null;
+  selectedUser: UserModel = null;
+  visible:number = 1;
   getUserByName(name:string): void{
    this.NotTwitterApi.getUsersByName(name).then(users => this.users = users);
+   this.visible = 1;
+  }
+
+  selectUser(user:UserModel):void{
+    this.visible = 0;
+    this.selectedUser = user ;
+
   }
   
 
-  constructor(private NotTwitterApi: NotTwitterAPIService) { }
+  constructor(private NotTwitterApi: NotTwitterAPIService, public auth: AuthService) {}
+  
+  get user() {
+    return this.NotTwitterApi.user;
+  }
 
   ngOnInit() {
-    //different approach from guy in video
-    // this.NotTwitterApi.getUsersByName().subscribe(users => this.users = users);
     }
   
   }

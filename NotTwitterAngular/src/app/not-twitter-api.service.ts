@@ -91,9 +91,9 @@ export class NotTwitterAPIService {
     return this.httpClient.get<PostModel>(url).toPromise();
   }
 
-  getPostByUser(userId: number): Promise<PostModel>{
+  getPostByUser(userId: number): Promise<PostModel[]>{
     const url = `${environment.notTwitterApiBaseUrl}/api/Post/user/${userId}`;
-    return this.httpClient.get<PostModel>(url).toPromise();
+    return this.httpClient.get<PostModel[]>(url).toPromise();
   }
   
   createPost(authorId: number, content: string){

@@ -19,7 +19,7 @@ export class PostComponent implements OnInit {
     this.loadPost();
   }
 
-  @Input()model:PostModel;
+  @Input() model:PostModel;
 
   loadPost():void{
     this.NotTwitterService.getUsersById(this.model.userId).then(user=>this.author = user);

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import PostModel from '../models/post-model';
-import { NotTwitterAPIService } from '../not-twitter-api.service';
-import UserModel from '../models/user-model';
+import PostModel from '../../models/post-model';
+import { NotTwitterAPIService } from '../../not-twitter-api.service';
+import UserModel from '../../models/user-model';
 
 @Component({
   selector: 'app-dashboard',
@@ -29,6 +29,7 @@ export class DashboardComponent implements OnInit {
     this.currentUser = this.NotTwitterService.user;
     this.NotTwitterService.getFriendPosts(this.currentUser.id).then(posts=>this.posts = posts);
     this.loaded = true;
+    console.log("dashboardloaded");
   }
 
 }

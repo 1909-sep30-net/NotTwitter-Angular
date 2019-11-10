@@ -1,5 +1,4 @@
-import {UserCreate} from "./userCreate"
-export interface Users extends UserCreate {
+export interface Users {
     id: number;
     username: string;
     email: string;
