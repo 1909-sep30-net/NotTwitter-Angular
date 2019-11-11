@@ -21,7 +21,7 @@ export class FriendRequestComponent implements OnInit {
 
   friends: FriendModel[];
   friendRequests: FriendRequestModel [] = [];
-  friendRequestStatus = ['pending', 'accepted', 'declined'];
+  friendRequestStatus = ['Pending Response', 'accepted', 'declined'];
 
   getUserFriends(id: number){
     // due to freezing bug calling stuff a bunch of times, I'll comment this out for now. However this implementation takes user id that we log in with
