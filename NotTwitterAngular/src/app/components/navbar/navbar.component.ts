@@ -12,15 +12,6 @@ import navbarItem from 'src/app/models/navbar-item-model';
 
 export class NavbarComponent implements OnInit {
 
-  //selectedPage: navbarItem;
-  pages: navbarItem[] = [
-    {title: "Dashboard"},
-    {title: "Write a Post"},
-    {title: "Friends"},
-    {title: "Settings"},
-    {title: "Log Out"},
-  ]
-
   constructor(
     public auth: AuthService,
     private NotTwitterApi: NotTwitterAPIService

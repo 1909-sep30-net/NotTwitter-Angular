@@ -50,4 +50,8 @@
         </div>
     </div>
 </div>
-    
+<ul class="navbar">
+        <li *ngFor="let page of pages" (click)="onSelect(page)">
+            <span class="badge">{{page.title}}</span>
+        </li>
+</ul>
