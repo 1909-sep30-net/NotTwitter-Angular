@@ -1,7 +1,7 @@
 
   <div class="fields-container">
       <h1>{{title}} </h1>
-      <mat-form-field (ngSubmit)='getUserByName($event)' color='primary' id='search-input' class='full-width' appearance='outline'>
+      <mat-form-field (ngSubmit)='getUserByName($event)' color='primary' id='search-input' appearance='outline'>
         <mat-label color='red'>Search</mat-label>
         <input matInput  [(ngModel)]='name' name='searchBar' [value]='name' (keyup.enter)='getUserByName(name)'>
       </mat-form-field>

@@ -22,6 +22,7 @@ import { ListFriendsComponent } from './components/list-friends/list-friends.com
 import { ListPostsComponent } from './components/list-posts/list-posts.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { SettingsComponent } from './components/settings/settings.component';
 
 
 // /import { FridgeComponent } from './fridge/fridge.component';
@@ -39,6 +40,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     ListPostsComponent,
     UserProfileComponent,
     DashboardComponent,
+    SettingsComponent,
   ],
   imports: [
     AppRoutingModule,
