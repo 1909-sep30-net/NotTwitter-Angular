@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NotTwitterAPIService } from '../../not-twitter-api.service';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import {NotTwitterAPIService} from '../../not-twitter-api.service';
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',

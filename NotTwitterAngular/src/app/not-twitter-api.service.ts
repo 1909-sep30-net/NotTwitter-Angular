@@ -57,12 +57,12 @@ export class NotTwitterAPIService {
   }
 
   getUsersById(id:number): Promise<UserModel>{
-    const url = `${environment.notTwitterApiBaseUrl}/api/User/${id}`;
+    const url = `${environment.notTwitterApiBaseUrl}/api/User/${this.user.id}`;
     return this.httpClient.get<UserModel>(url).toPromise();
   }
 
   getFriendPosts(id:number): Promise<PostModel[]>{
-    const url = `${environment.notTwitterApiBaseUrl}/api/User/friendposts/${id}`;
+    const url = `${environment.notTwitterApiBaseUrl}/api/User/friendposts/${this.user.id}`;
     return this.httpClient.get<PostModel[]>(url).toPromise();
   }
 
@@ -91,9 +91,9 @@ export class NotTwitterAPIService {
     return this.httpClient.get<PostModel>(url).toPromise();
   }
 
-  getPostByUser(userId: number): Promise<PostModel>{
+  getPostByUser(userId: number): Promise<PostModel[]>{
     const url = `${environment.notTwitterApiBaseUrl}/api/Post/user/${userId}`;
-    return this.httpClient.get<PostModel>(url).toPromise();
+    return this.httpClient.get<PostModel[]>(url).toPromise();
   }
   
   createPost(authorId: number, content: string){
@@ -135,7 +135,7 @@ export class NotTwitterAPIService {
 
   updateComment(commentId: number, commentModel:CommentModel){
     const url = `${environment.notTwitterApiBaseUrl}/api/Comment/${commentId}`;
-    return this.httpClient.put<CommentModel>(url, {commentId,commentModel}).toPromise
+    return this.httpClient.put<CommentModel>(url, {commentId,commentModel}).toPromise();
   }
 
   //API parameters for delete comment seem to require both postId and a postModel. However httpclient.delete only allows for url and options. 

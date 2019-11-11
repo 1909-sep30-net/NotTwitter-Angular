@@ -1,0 +1,11 @@
+<p>dashboard works!</p>
+<div class="dashboard" *ngIf="loaded && currentUser">
+    <span>{{currentUser.id}}</span><p>{{currentUser.username}}</p>
+    <ul *ngIf="posts">
+        <div *ngFor="let post of posts">
+            <app-post [model]="post"></app-post>
+            <br>
+        </div>
+    </ul>
+</div>
+

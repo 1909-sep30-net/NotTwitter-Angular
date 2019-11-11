@@ -6,7 +6,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { UsersComponent } from './components/users/users.component';
-import { HomeComponent } from './components/home/home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { FormsModule } from '@angular/forms';
@@ -19,6 +18,10 @@ import { UserComponent } from './components/user/user.component';
 import { PostComponent } from './components/post/post.component';
 import { FriendRequestComponent } from './components/friend-request/friend-request.component';
 import { CommentComponent } from './components/comment/comment.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { ListFriendsComponent } from './components/list-friends/list-friends.component';
+import { ListPostsComponent } from './components/list-posts/list-posts.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 
 
@@ -28,12 +31,15 @@ import { CommentComponent } from './components/comment/comment.component';
     AppComponent,
     NavbarComponent,
     UsersComponent,
-    HomeComponent,
 
     UserComponent,
     PostComponent,
     CommentComponent,
     FriendRequestComponent,
+    ListFriendsComponent,
+    ListPostsComponent,
+    UserProfileComponent,
+    DashboardComponent,
   ],
   imports: [
     AppRoutingModule,
