@@ -10,6 +10,7 @@ import CommentModel from './models/comment-model';
 
 import FriendRequestModel from './models/friendrequest-model';
 import { AuthService } from './auth.service';
+import CommentCreate from './models/comment-create-model';
 
 
 @Injectable({
@@ -128,7 +129,7 @@ export class NotTwitterAPIService {
     return this.httpClient.get<CommentModel>(url).toPromise();
   }
 
-  createComment(commentModel:CommentModel){
+  createComment(commentModel:CommentCreate){
     const url = `${environment.notTwitterApiBaseUrl}/api/Comment`;
     return this.httpClient.post<CommentModel>(url, commentModel).toPromise();
   }

@@ -14,7 +14,7 @@ export class CommentComponent implements OnInit {
   loaded:boolean=false;
 
   loadComment():void{
-    this.NotTwitterService.getUsersById(this.model.userId).then(user=>this.author = user);
+    this.NotTwitterService.getUsersById(this.model.authorId).then(user=>this.author = user);
     this.loaded = true;
   }
 

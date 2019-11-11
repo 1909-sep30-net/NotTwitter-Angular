@@ -30,7 +30,8 @@ export class NavbarComponent implements OnInit {
       return this.NotTwitterApi.user;
     }
 
-    selectedPage:number;
+    selectedPage:number = 1;
+    
     SelectPage(page:number){
       this.selectedPage = page;
       console.log(this.selectedPage);

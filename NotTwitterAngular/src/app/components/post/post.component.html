@@ -3,15 +3,19 @@
     <br>
     <h2>{{model.text}}</h2>
 </div>
-<div *ngIf="model.comments">
+<div *ngIf="model">
     <ul class="comments">
-        <div
+        <div class="comSec"
             *ngFor="let comment of model.comments"
         >
             <app-comment [model] = "comment"></app-comment>
     </div>
     </ul>
     <label> Write Comment:
-        <input placeholder="Have something to add?">
+        <input #commentInput
+            (keyup.enter)="addComment(commentInput.value); commentInput.value=''"
+            (blur) = " commentInput.value='' "
+            placeholder="Have something to add?" >
+            <button (click)="addComment(commentInput.value)">Send</button>
     </label>
 </div>
