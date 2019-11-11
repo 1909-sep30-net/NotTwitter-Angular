@@ -2,34 +2,32 @@
 <!-- <mat-form-field (ngSubmit)='getUserFriends($event)' (ngSubmit)='getUserFriendRequests($event)' color='primary' id='search-input' class='full-width' appearance='outline'>
         <mat-label color='red'>Search</mat-label>
         <input #searchBar matInput  [(ngModel)]='id' name='searchBar' [value]='id' (keyup.enter)='getUserFriends(id)' (keyup.enter)='getUserFriendRequests(id)'>
-</mat-form-field> -->
-<div *ngIf="friends">
-  <h2>Friends: </h2>
-  <!-- {{getUserFriends()}} -->
-  <div *ngIf ="user">
-  
-  <table>
-    <tr>
-      <th>Name</th>
-      <th></th>
-      <th></th>
-    </tr>
-  
-    <tr *ngFor = "let friend of user.friends">
-      <td>{{friend.firstName}} {{friend.lastName}}</td>
-      <td> <button mat-button>Go to Profile</button> </td>    
-      <td><button mat-button>Remove friend</button></td> 
-      </tr>
-  </table>
-  </div>
-</div>
+</mat-form-field>
+     -->
+<h2>Friends: </h2>
+<!-- {{getUserFriends()}} -->
+<div *ngIf ="user">
 
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <tr *ngFor = "let friend of user.friends">
+    <td>{{friend.firstName}} {{friend.lastName}}</td>
+    <td> <button mat-button>Go to Profile</button> </td>    
+    <td><button mat-button>Remove friend</button></td> 
+    </tr>
+</table>
+</div>
 
 <h2>Friends Requests: </h2>
 <!-- {{getUserFriendRequests()}} -->
-<div *ngIf="friendRequests">
-  <table>
-    <!-- {{}} -->
+
+<table>
+    <!-- {{getNamesFromRequests(friendRequests)}} -->
         <tr>
           <th>Sender ID</th>
           <th>Receiver ID</th>
@@ -51,5 +49,3 @@
           <td> <button mat-button (click) = "declineFriendRequest(friend)">Decline</button></td> 
         </tr>
       </table>
-</div>
-

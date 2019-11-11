@@ -16,22 +16,22 @@ export class FriendRequestComponent implements OnInit {
   
   user : UserModel;
   userFriendRequests: UserModel[];
-  //id = 0;
+  id = this.NotTwitterAPI.user.id;
 
   friends: FriendModel[];
-  friendRequests: FriendRequestModel [] = [];
+  friendRequests: FriendRequestModel [];
   friendRequestStatus = ['Pending Response', 'accepted', 'declined'];
 
-  @Input()model:UserModel;
+  // @Input()model:UserModel;
 
-  get User(){
-    return this.NotTwitterAPI.user;
-  }
+  // get User(){
+  //   return this.NotTwitterAPI.user;
+  // }
 
   getUserFriends(){
     // due to freezing bug calling stuff a bunch of times, I'll comment this out for now. However this implementation takes user id that we log in with
     // const id = this.NotTwitterAPI.user.id;
-    this.NotTwitterAPI.getUsersById(this.model.id).then(user => this.user = user);
+    this.NotTwitterAPI.getUsersById(this.id).then(user => this.user = user);
     // this.NotTwitterAPI.getUsersById(this.User.id).then(user => this.user = user);
     // this.friends = this.NotTwitterAPI.user.friends;
     // console.log(this.friends);
@@ -42,16 +42,20 @@ export class FriendRequestComponent implements OnInit {
     // const id = this.NotTwitterAPI.user.id;
     // this.NotTwitterAPI.getFriendRequest(id).then(friendRequest => this.friendRequests = friendRequest);
 
-    this.NotTwitterAPI.getFriendRequest(this.User.id).then(friendRequest => this.friendRequests = friendRequest)
+    this.NotTwitterAPI.getFriendRequest(this.id).then(friendRequest => this.friendRequests = friendRequest)
+    .then(() => {console.log(this.friendRequests[0].senderId)});
+    // .then( () => { for(let entry of this.friendRequests){
+    //   this.NotTwitterAPI.getUsersById(entry.senderId).then(userModel => this.userFriendRequests.push(userModel));
+    // }});
     
     //^ will return an array of friendRequests {sender id, receiver id}, now I need to find sender Id with api
     //and display their names.
 
     // for(let entry of this.friendRequests){
-    // //for each sender id we got from getFriendRequests, use getUsersById(sender.id) and push it onto the userFriend[]
+    // for each sender id we got from getFriendRequests, use getUsersById(sender.id) and push it onto the userFriend[]
 
     //   this.NotTwitterAPI.getUsersById(entry.senderId).then(friendModel => this.userFriendRequests.push(friendModel));
-    //  // after that, in html I need to display just the name properties of such users that are inside the array
+    //  after that, in html I need to display just the name properties of such users that are inside the array
     // }
   }
 
@@ -78,7 +82,11 @@ export class FriendRequestComponent implements OnInit {
   ngOnInit() {
 
     this.getUserFriends();
-    //this.getUserFriendRequests();
+    this.getUserFriendRequests();
+    // for(let entry of this.friendRequests){
+    //   entry.senderId;
+    //   entry.receiverId;
+    // }
+    //this.getNamesFromRequests();
   }
-
 }

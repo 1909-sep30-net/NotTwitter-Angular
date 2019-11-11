@@ -24,7 +24,7 @@ export class UserComponent implements OnInit {
 
   }
   getUserById(id:number): void{
-    this.NotTwitterApi.getUsersById(id).then(user => this.iduser = user);
+    this.NotTwitterApi.getUsersById(id).then(user => this.selectedUser = user);
    }
 
   constructor(private NotTwitterApi: NotTwitterAPIService, public auth: AuthService) {}
