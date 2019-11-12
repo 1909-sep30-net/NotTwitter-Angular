@@ -6,6 +6,7 @@ import PostModel from 'src/app/models/post-model'
 import { NotTwitterAPIService } from 'src/app/not-twitter-api.service';
 import UserModel from 'src/app/models/user-model';
 import { Subscription } from 'rxjs';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-post',
@@ -18,7 +19,8 @@ export class PostComponent implements OnInit {
   currentUser:UserModel = null;
   myPostId:number = null;
   userSubscription:Subscription;
-
+  content = new FormControl('');
+  
   constructor(private notTwitApi:NotTwitterAPIService) { }
 
   @Input() model:PostModel;

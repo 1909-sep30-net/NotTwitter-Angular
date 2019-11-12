@@ -1,6 +1,13 @@
 <div class="comment" *ngIf="author">
-    <h6>{{author.username}}</h6>
-    <p>{{model.content}}</p>
-    <h6>{{model.timeSent}}</h6>
+    <div class="panel panel-info">
+        <h5>Author: {{author.username}}</h5>
+        <div class="panel-body">
+            <p>{{model.content}}</p>
+            <hr>
+            <h6>{{model.timeSent}}</h6>
+        </div>
+
+    </div>
+    <hr>
 </div>
 

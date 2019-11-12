@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -24,6 +24,8 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { UserProfilePageComponent } from './components/user-profile-page/user-profile-page.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 
 // /import { FridgeComponent } from './fridge/fridge.component';
@@ -49,13 +51,18 @@ import { UserProfilePageComponent } from './components/user-profile-page/user-pr
     HttpClientModule,
     BrowserModule,
     CommonModule,
+    ReactiveFormsModule,
 
     BrowserAnimationsModule,
     FormsModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    RouterModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas:[
+    NO_ERRORS_SCHEMA
+  ]
 })
 export class AppModule { }

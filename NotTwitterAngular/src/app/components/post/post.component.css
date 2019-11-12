@@ -1,11 +1,15 @@
 .post{
-    background-color: #a9e5bb;
+    resize: none;
+    height: 130px;
+    width: 90%;
+    border: 1px solid rgb(57, 221, 250);
+    border-radius: 25px;
+    padding: 10px;
+    background: white !important;
 }
-.comments{
-    background-color: #c1bc87;
-}
-
 .comSec{
-    border: "5px";
-    border-color: black;
+    margin:10px 0;
+    height: 130px;
+    width: 80%;
+
 }

@@ -1,9 +1,10 @@
 <div class="dashboard" *ngIf="loggedInUser">
-    <h3>{{loggedInUser.username}}'s Dashboard</h3>
+    <h1>Welcome Back {{loggedInUser.username}}</h1>
+    <hr>
     <div *ngIf="posts">
         <div *ngFor="let post of posts">
             <app-post *ngIf="post" [model]="post" [postId]="post.postID"></app-post>
-            <br>
+            <hr>
         </div>
     </div>
 </div>
