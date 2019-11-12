@@ -34,15 +34,16 @@
     <th>Decline</th>
   </tr>
 
-  <div *ngFor ="let entry of requestStatus">
-    <div *ngIf = "entry.status == 1">
-    <tr *ngFor="let user of userFriendRequests">         
-        <td>  {{user.firstName}} {{user.lastName}}</td>
-        <td>  Pending</td> <td>Resolved</td>
+  <div *ngFor ="let entry of friendRequests">
+    <div *ngIf = "entry.status == 0 "> 
+      <tr>
+        <td>  {{entry.senderId}} {{entry.receiverId}}</td>
+        <td>  Pending</td> 
         <td> <button mat-button (click)="acceptFriendRequest(user.id)">Confirm</button> </td>
         <td > <button mat-button (click)="declineFriendRequest(user.id)">Decline</button></td>
     </tr> 
   </div>
+  <!-- </div> -->
     <!-- <tr *ngFor="let friend of friendRequests">         
         <td>  {{user.firstName}} {{user.lastName}}</td>
         <td *ngIf = "display">  Pending</td> <td>Resolved</td>

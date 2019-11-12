@@ -52,15 +52,13 @@ export class FriendRequestComponent implements OnInit {
   acceptFriendRequest(senderId:number){
     this.request.receiverId = this.NotTwitterAPI.user.id;
     this.request.senderId = senderId;
-    this.NotTwitterAPI.acceptRequest(this.request)
-    .then( () => this.request.status = 1);
+    this.NotTwitterAPI.acceptRequest(this.request);
   }
 
   declineFriendRequest(senderId: number){
     this.request.receiverId = this.NotTwitterAPI.user.id;
     this.request.senderId = senderId;
-    this.NotTwitterAPI.declineRequest(this.request)
-    .then ( () => this.request.status = 1);
+    this.NotTwitterAPI.declineRequest(this.request);
   }
   
   constructor(private NotTwitterAPI: NotTwitterAPIService) { }
