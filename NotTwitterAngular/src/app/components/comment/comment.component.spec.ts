@@ -3,6 +3,9 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { CommentComponent } from './comment.component';
 import { HttpClient } from 'selenium-webdriver/http';
 import { NotTwitterAPIService } from 'src/app/not-twitter-api.service';
+import { RouterTestingModule } from '@angular/router/testing';
+import { UserComponent } from '../user/user.component';
+import CommentModel from '../../models/comment-model';
 
 describe('CommentComponent', () => {
   let component: CommentComponent;
@@ -10,11 +13,19 @@ describe('CommentComponent', () => {
   let service: NotTwitterAPIService;
   let injector: TestBed;
   let httpMock: HttpTestingController;
+  let drift;
+  let driftInfo = {
+    authorId: 1,
+    commentId: 1,
+    postId: 1,
+    timeSent: Date.prototype,
+    content: "content"
+  }
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CommentComponent, HttpClient ],
-      imports: [HttpClientTestingModule],
+      declarations: [ CommentComponent ],
+      imports: [HttpClientTestingModule, RouterTestingModule],
       providers: [NotTwitterAPIService]
     })
     .compileComponents();
@@ -25,13 +36,12 @@ describe('CommentComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(CommentComponent);
+    drift = fixture.debugElement.componentInstance;
     component = fixture.componentInstance;
+    component.model = driftInfo;
     fixture.detectChanges();
   });
 
-  afterEach(()=>{
-    httpMock.verify();
-  });
 
   it('should create', () => {
     expect(component).toBeTruthy();

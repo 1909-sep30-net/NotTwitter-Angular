@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UsersComponent } from './users.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { NotTwitterAPIService } from 'src/app/not-twitter-api.service';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('UsersComponent', () => {
   let component: UsersComponent;
@@ -8,7 +11,9 @@ describe('UsersComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UsersComponent ]
+      declarations: [ UsersComponent ],
+      imports:[HttpClientTestingModule, RouterTestingModule],
+      providers:[NotTwitterAPIService]
     })
     .compileComponents();
   }));

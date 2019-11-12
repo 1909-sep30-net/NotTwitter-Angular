@@ -15,7 +15,7 @@ export class UserProfileComponent implements OnInit {
   constructor(public auth: AuthService, private NotTwitterApi: NotTwitterAPIService) { }
 
   ngOnInit() {
-    console.log(`this model: ${this.model.id}`);
+    //console.log(`this model: ${this.model.id}`);
     this.getUserInfo();
   }
 
@@ -24,7 +24,7 @@ export class UserProfileComponent implements OnInit {
     this.user = this.NotTwitterApi.user;
   }
 
-  @Input()model:UserModel;
+  @Input() model: UserModel;
 
   getUserInfo(): Promise<UserModel>{
     return this.NotTwitterApi.getUsersById(this.model.id).then(u=>this.user = u);

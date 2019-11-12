@@ -5,7 +5,10 @@ import { NO_ERRORS_SCHEMA } from '@angular/compiler/src/core';
 import { PostComponent } from '../post/post.component';
 import { CommentComponent } from '../comment/comment.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { NotTwitterAPIService } from 'src/app/not-twitter-api.service';
+import { RouterTestingModule } from '@angular/router/testing';
 
 
 describe('DashboardComponent', () => {
@@ -15,7 +18,9 @@ describe('DashboardComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ DashboardComponent, PostComponent, CommentComponent],
-      schemas:[CUSTOM_ELEMENTS_SCHEMA]
+      imports:[ReactiveFormsModule, FormsModule, HttpClientTestingModule, RouterTestingModule],
+      schemas:[CUSTOM_ELEMENTS_SCHEMA],
+      providers:[NotTwitterAPIService]
     })
     .compileComponents();
   }));
