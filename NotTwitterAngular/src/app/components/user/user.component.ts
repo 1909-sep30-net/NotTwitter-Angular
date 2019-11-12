@@ -25,7 +25,9 @@ export class UserComponent implements OnInit {
     this.selectedUser = user;
     this.showingProfile = true;
   }
-  
+  getUserById(id:number): void{
+    this.NotTwitterApi.getUsersById(id).then(user => this.selectedUser = user);
+   }
 
   constructor(private NotTwitterApi: NotTwitterAPIService, public auth: AuthService) {}
   

@@ -1,4 +1,5 @@
 export default interface FriendRequestModel{
-    senderId:Number,
-    receiverId:Number
+    senderId: number,
+    receiverId: number,
+    status: number
 };

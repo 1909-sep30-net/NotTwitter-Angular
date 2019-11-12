@@ -219,9 +219,9 @@ export class NotTwitterAPIService {
   FriendRequest controller
   */
 
-  getFriendRequest(userId: number): Promise<FriendRequestModel> {
+  getFriendRequest(userId: number): Promise<FriendRequestModel[]> {
     const url = `${environment.notTwitterApiBaseUrl}/api/FriendRequest/${userId}`;
-    return this.httpClient.get<FriendRequestModel>(url).toPromise();
+    return this.httpClient.get<FriendRequestModel[]>(url).toPromise();
   }
 
   createRequest(friendRequest: FriendRequestModel) {
