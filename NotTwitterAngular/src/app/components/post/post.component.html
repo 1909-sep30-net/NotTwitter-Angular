@@ -1,5 +1,5 @@
 <div class="post" *ngIf="loggedInUser">
-    <h6>{{loggedInUser.username}}</h6>
+    <h6>Author: {{loggedInUser.username}}</h6>
     <br>
 
 </div>
@@ -15,11 +15,17 @@
             <app-comment [model] = "comment"></app-comment>
     </div>
     </ul>
-    <label> Write Comment:
+    <label> Write a Comment:
         <input #commentInput
             (keyup.enter)="addComment(commentInput.value); commentInput.value=''"
             (blur) = " commentInput.value='' "
             placeholder="Have something to add?" >
             <button (click)="addComment(commentInput.value)">Send</button>
     </label>
+
+    <mat-form-field (ngSubmit)='addComment($event)' color='primary' id='search-input' appearance='outline'>
+        <mat-label color='red'>Comment</mat-label>
+        <input matInput [(ngModel)]='content' name='commentPost' [value]='content' (keyup.enter)='addComment(content);'>
+    </mat-form-field>
+        <button mat-raised-button color="primary" (click)='addComment(content);' id='submit-search' type='submit' for='commentPost'>Send</button>
 </div>

@@ -8,7 +8,7 @@
                 <app-dashboard></app-dashboard>                    
             </div>
             <div *ngIf ="navbar.selectedPage == 2">
-                <app-post></app-post>
+                <app-user-profile-page *ngIf = "loggedInUser.id" [userId]='loggedInUser.id'></app-user-profile-page>
             </div>
             <div *ngIf ="navbar.selectedPage == 3">
                 <app-user></app-user>

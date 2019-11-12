@@ -15,6 +15,9 @@ export class AppComponent implements OnInit {
   userSubscription:Subscription;
   loggedInUser: UserModel = this.notTwit.user;
   loading: boolean = false;
+
+  selectedUserId: number; // userid thats for displaying a selected user profile
+
   constructor(private auth: AuthService, private notTwit: NotTwitterAPIService) {
   }
 
@@ -24,7 +27,8 @@ export class AppComponent implements OnInit {
     this.userSubscription = this.notTwit.userChanged.subscribe( newUser => 
       {
         this.loggedInUser = newUser;
-        console.log("user loaded!!!! from app component");
+        console.log(`user loaded!!!! from app component ${this.loggedInUser.firstName}`);
+        this.selectedUserId = this.loggedInUser.id;
       }
     );
     //console.log(this.notTwit.user);

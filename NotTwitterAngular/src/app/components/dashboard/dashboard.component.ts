@@ -28,50 +28,32 @@ export class DashboardComponent implements OnInit {
     this.userSubscription = this.notTwitApi.userChanged.subscribe( newUser => 
       {
         this.loggedInUser = newUser;
-        console.log("user loaded!!!! from dashboard");
+        //console.log("user loaded!!!! from dashboard");
         //this.notTwitApi.getUsersById(newUser.id).then(u => {this.friends = u.friends}).then(()=>{console.log("friends loaded - dashboard")});
         this.notTwitApi.getFriendPosts(this.loggedInUser.id)
           .then(posts => {
             this.posts = posts;
             console.log(this.posts);
           })
-          .then(()=>{this.loading=false; console.log(`loaded posts - dashboard ${this.loggedInUser.id}`)});
+          .then(()=>{this.loading=false;});
         //this.getLoginUser();
       }
     );
+    console.log("dashboard re initted");
+    if (this.posts == null && this.loggedInUser != null){
+      this.notTwitApi.getFriendPosts(this.loggedInUser.id)
+          .then(posts => {
+            this.posts = posts;
+            console.log(this.posts);
+          })
+          .then(()=>{this.loading=false;});
+    }
 
   }
 
-  // ngOnChanges(){
-  //   this.loadUser();
-  // }
-
-  // getLoginUser(){
-  //   this.notTwitApi.user$.subscribe( data => {
-  //     this.loggedInUser = data; // populate the loggedinuser with the user data
-  //     console.log("logged in");
-  //   });
-  // }
-
-  // loadDash(){
-  //   if (this.user != null){
-  //     this.notTwitApi.getFriendPosts(this.user.id)
-  //       .then(posts => this.posts = posts)
-  //       .then(() => this.loading = true);
-
-  //     this.loadUser();
-  //     console.log(`HELLO THIS IS THE FIRST FRIEND'S NAME MAYBE`);
-  //   }
-  // }
-
-  // loadUser(){
-  //   console.log(`loading user: ${this.user.id}`);
-
-  //   return this.notTwitApi.getUsersById(this.user.id).then(u => this.friends = u.friends);
-  // }
-
-  // loadFriends(){
-  //   this.friends = this.user.friends;
-  // }
+  ngOnDestroy() {
+    //prevent memory leak when component destroyed
+     this.userSubscription.unsubscribe();
+   }
 
 }

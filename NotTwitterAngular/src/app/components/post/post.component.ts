@@ -25,13 +25,13 @@ export class PostComponent implements OnInit {
   @Input() postId:number;
 
   ngOnInit() {
-    console.log(`ngOnInit fired, post id is ${this.postId}`);
-    console.log(`model post id: ${this.model.postID}`);
-    console.log(`current post author: ${this.notTwitApi.user.id}`);
+    //console.log(`ngOnInit fired, post id is ${this.postId}`);
+    //console.log(`model post id: ${this.model.postID}`);
+    //console.log(`current post author: ${this.notTwitApi.user.id}`);
     this.userSubscription = this.notTwitApi.userChanged.subscribe( newUser => 
       {
         this.loggedInUser = newUser;
-        console.log(`user loaded!!!! from post, it's id is: ${this.loggedInUser.id}`);
+        //console.log(`user loaded!!!! from post, it's id is: ${this.loggedInUser.id}`);
         //this.getLoginUser();
         this.loadPost();
       }
@@ -48,9 +48,9 @@ export class PostComponent implements OnInit {
   loadPost():void{
     // this.NotTwitterService.getUsersById(this.model.userId).then(user=>{this.author = user; console.log("user,get")});
     // this.currentUser = this.NotTwitterService.user;
-    console.log(`loading post with id: ${this.model.postID}`)
+    //console.log(`loading post with id: ${this.model.postID}`)
     //this.myPostId = this.model.postId;
-    console.log("done loading");
+    //console.log("done loading");
     this.notTwitApi.getPostById(this.postId).then(newPost=>this.model = newPost);
 
   }
@@ -65,6 +65,14 @@ export class PostComponent implements OnInit {
     console.log(`added comment by ${this.notTwitApi.user.username}`);
     console.log(`for postid: ${this.myPostId}`);
     this.loadPost();
+    let mockComment:CommentModel = {
+      content: content,
+      postId: this.postId,
+      authorId: this.notTwitApi.user.id,
+      commentId: 0,
+      timeSent: new Date(Date.now())
+    };
+    this.model.comments.push(mockComment);
 
   }
 

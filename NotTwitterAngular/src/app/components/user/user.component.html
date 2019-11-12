@@ -1,5 +1,5 @@
 
-  <!-- <div class="fields-container">
+  <div class="fields-container">
       <mat-form-field (ngSubmit)='getUserByName($event)' color='primary' id='search-input' appearance='outline'>
         <mat-label color='red'>Search</mat-label>
         <input matInput  [(ngModel)]='name' name='searchBar' [value]='name' (keyup.enter)='getUserByName(name)'>
@@ -14,11 +14,15 @@
         </tr>
       </table>
     </div>
+  </div>
+
+  <!-- <div *ngIf="selectedUser && visible ==0">
+    <-- user profile component --
+    <app-user-profile [model]="selectedUser"></app-user-profile>
   </div> -->
 
-  <div *ngIf="selectedUser && visible ==0">
-    <!-- user profile component -->
-    <app-user-profile [model]="selectedUser"></app-user-profile>
+  <div *ngIf="showingProfile">
+    <app-user-profile-page [userId]="selectedUser.id"></app-user-profile-page>
   </div>
 
 

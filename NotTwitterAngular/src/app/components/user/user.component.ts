@@ -13,6 +13,7 @@ export class UserComponent implements OnInit {
   users: UserModel[] = null;
   selectedUser: UserModel = null;
   visible:number = 1;
+  showingProfile:boolean = false;
   
   getUserByName(name:string): void{
    this.NotTwitterApi.getUsersByName(name).then(users => this.users = users);
@@ -21,8 +22,8 @@ export class UserComponent implements OnInit {
 
   selectUser(user:UserModel):void{
     this.visible = 0;
-    this.selectedUser = user ;
-
+    this.selectedUser = user;
+    this.showingProfile = true;
   }
   
 
@@ -33,7 +34,8 @@ export class UserComponent implements OnInit {
   }
 
   ngOnInit() {
-    }
-  
+
   }
+  
+}
 
