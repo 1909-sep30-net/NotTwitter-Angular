@@ -25,7 +25,7 @@
 
     <mat-form-field (ngSubmit)='addComment($event)' color='primary' id='search-input' appearance='outline'>
         <mat-label color='red'>Comment</mat-label>
-        <input matInput [(ngModel)]='content' name='commentPost' [value]='content' (keyup.enter)='addComment(content);'>
+        <input matInput [(ngModel)]='content' name='commentPost' [value]='content' (keyup.enter)='addComment(content);' (blur)="value=''">
     </mat-form-field>
         <button mat-raised-button color="primary" (click)='addComment(content);' id='submit-search' type='submit' for='commentPost'>Send</button>
 </div>
