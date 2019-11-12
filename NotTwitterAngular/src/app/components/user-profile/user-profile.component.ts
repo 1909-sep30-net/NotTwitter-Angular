@@ -12,14 +12,16 @@ import PostModel from 'src/app/models/post-model';
 export class UserProfileComponent implements OnInit {
   user: UserModel;
 
-  //posts: PostModel[] = null;
-
   constructor(public auth: AuthService, private NotTwitterApi: NotTwitterAPIService) { }
 
   ngOnInit() {
-    console.log(this.model.id);
+    console.log(`this model: ${this.model.id}`);
     this.getUserInfo();
-    //this.NotTwitterApi.getUsersById(37).then(u=>this.user = u)
+  }
+
+  ngOnChanges(){
+    console.log("loading user");
+    this.user = this.NotTwitterApi.user;
   }
 
   @Input()model:UserModel;

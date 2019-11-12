@@ -5,6 +5,7 @@ import CommentModel from 'src/app/models/comment-model';
 import PostModel from 'src/app/models/post-model'
 import { NotTwitterAPIService } from 'src/app/not-twitter-api.service';
 import UserModel from 'src/app/models/user-model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-post',
@@ -13,38 +14,58 @@ import UserModel from 'src/app/models/user-model';
 })
 export class PostComponent implements OnInit {
 
-  author:UserModel = null;
+  loggedInUser:UserModel = null;
   currentUser:UserModel = null;
   myPostId:number = null;
+  userSubscription:Subscription;
 
-  constructor(private NotTwitterService:NotTwitterAPIService) { }
+  constructor(private notTwitApi:NotTwitterAPIService) { }
 
   @Input() model:PostModel;
+  @Input() postId:number;
 
   ngOnInit() {
-    console.log("ngOnInit fired");
-    this.loadPost();
+    console.log(`ngOnInit fired, post id is ${this.postId}`);
+    console.log(`model post id: ${this.model.postID}`);
+    console.log(`current post author: ${this.notTwitApi.user.id}`);
+    this.userSubscription = this.notTwitApi.userChanged.subscribe( newUser => 
+      {
+        this.loggedInUser = newUser;
+        console.log(`user loaded!!!! from post, it's id is: ${this.loggedInUser.id}`);
+        //this.getLoginUser();
+        this.loadPost();
+      }
+    );
+    //this.loadPost();
+  }
+
+  ngOnChanges(){
+    //console.log(`incoming post id: ${this.model.postID}`);
+    //this.loadPost();
   }
 
 
   loadPost():void{
-    this.NotTwitterService.getUsersById(this.model.userId).then(user=>{this.author = user; console.log("user,get")});
-    this.currentUser = this.NotTwitterService.user;
-    this.myPostId = this.model.postId;
+    // this.NotTwitterService.getUsersById(this.model.userId).then(user=>{this.author = user; console.log("user,get")});
+    // this.currentUser = this.NotTwitterService.user;
+    console.log(`loading post with id: ${this.model.postID}`)
+    //this.myPostId = this.model.postId;
     console.log("done loading");
+    this.notTwitApi.getPostById(this.postId).then(newPost=>this.model = newPost);
 
   }
 
   addComment(content:string):void{
     let newComment:CommentCreate = {
       content: content,
-      postId: this.myPostId,
-      authorId: this.NotTwitterService.user.id
-
+      postId: this.postId,
+      authorId: this.notTwitApi.user.id
     }
-    this.NotTwitterService.createComment(newComment);
-    console.log(`added comment by ${this.currentUser.username}`);
+    this.notTwitApi.createComment(newComment);
+    console.log(`added comment by ${this.notTwitApi.user.username}`);
     console.log(`for postid: ${this.myPostId}`);
+    this.loadPost();
+
   }
 
 

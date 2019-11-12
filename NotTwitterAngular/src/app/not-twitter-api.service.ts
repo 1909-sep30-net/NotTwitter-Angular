@@ -11,6 +11,8 @@ import CommentModel from './models/comment-model';
 import FriendRequestModel from './models/friendrequest-model';
 import { AuthService } from './auth.service';
 import CommentCreate from './models/comment-create-model';
+import { Observable, from, Subject } from 'rxjs';
+import { map, mergeMap } from 'rxjs/operators';
 
 
 @Injectable({
@@ -21,33 +23,99 @@ import CommentCreate from './models/comment-create-model';
 If PUT/POST requests not workinh as inteded, might have to create models with specific values for each of the controller calls
 */
 export class NotTwitterAPIService {
-  user: UserModel = null;
+  user$: Observable<UserModel> = null;
+  user: UserModel;
+  userChanged = new Subject<UserModel>();
+  // constructor(
+  //   private httpClient: HttpClient,
+  //   auth: AuthService
+  // ) {
+  //   this.user$ = auth.userProfile$.pipe(mergeMap(data => {
+  //     if (!data) {
+  //       console.log("data was null");
+  //       return null;
+  //     } else {
+  //       console.log("data not null");
+  //       return from(this.getUserByEmail(data.email)
+  //         .catch((err: HttpErrorResponse) => {
+  //           if (err.status === 404) {
+  //             // user does not exist, create
+  //             throw err;
+  //           } else {
+  //             throw err;
+  //           }
+  //         }
+  //       ));
+  //     }
+  //   }));
+  // }
+
+  // loadUser(): Observable<UserModel> {
+  //   return this.http.get(apiURL)
+  //       .map(res => {
+  //         return res.json().results.map(item => {
+  //           return new SearchItem(
+  //               item.trackName,
+  //               item.artistName,
+  //               item.trackViewUrl,
+  //               item.artworkUrl30,
+  //               item.artistId
+  //           );
+  //         });
+  //       });
+  // }
+
 
   constructor(
-    private httpClient : HttpClient,
+    private httpClient: HttpClient,
     auth: AuthService
-    ) {
-      auth.userProfile$.subscribe(data =>{
-         if(data){
-          this.getUserByEmail(data.email).catch((err: HttpErrorResponse) => {
-            if (err.status === 404) {
-              // user does not exist, create
-              throw err;
-            } else {
-              throw err;
-            }
-          }).then(apiUser => {
-            this.user = apiUser;
-          });
-         } 
-      });
-      
-    }
+  ) {
+    auth.userProfile$.subscribe(user => {
+      if (user) {
+        this.getUserByEmail(user.email).catch((err: HttpErrorResponse) => {
+          if (err.status === 404) {
+            // if user does not exist, create
+            //return this.createUser({ email: user.email, name: user.name });
+            throw err;
+          } else {
+            throw err;
+          }
+        }).then(apiUser => {
+          this.user = apiUser;
+          this.userChanged.next(this.user);
+        });
+      }
+    });
+
+  }
+
+  // constructor(
+  //   private httpClient: HttpClient,
+  //   auth: AuthService
+  // ) {
+  //   auth.userProfile$.subscribe(user => {
+  //     if (user) {
+  //       this.getUserByEmail(user.email).catch((err: HttpErrorResponse) => {
+  //         if (err.status === 404) {
+  //           // if user does not exist, create
+  //           //return this.createUser({ email: user.email, name: user.name });
+  //           throw err;
+  //         } else {
+  //           throw err;
+  //         }
+  //       }).then(apiUser => {
+  //         this.user = apiUser;
+  //       });
+  //     }
+  //   });
+  // }
+
+
 
   /*
   User Controller Functionality
   */
-  getUsersByName(name:string): Promise<UserModel[]>{
+  getUsersByName(name: string): Promise<UserModel[]> {
     const url = `${environment.notTwitterApiBaseUrl}/api/User/name/${name}`;
     return this.httpClient.get<UserModel[]>(url).toPromise();
   }
@@ -57,27 +125,27 @@ export class NotTwitterAPIService {
     return this.httpClient.get<UserModel>(url).toPromise();
   }
 
-  getUsersById(id:number): Promise<UserModel>{
-    const url = `${environment.notTwitterApiBaseUrl}/api/User/${this.user.id}`;
+  getUsersById(id: number): Promise<UserModel> {
+    const url = `${environment.notTwitterApiBaseUrl}/api/User/${id}`;
     return this.httpClient.get<UserModel>(url).toPromise();
   }
 
-  getFriendPosts(id:number): Promise<PostModel[]>{
-    const url = `${environment.notTwitterApiBaseUrl}/api/User/friendposts/${this.user.id}`;
+  getFriendPosts(id: number): Promise<PostModel[]> {
+    const url = `${environment.notTwitterApiBaseUrl}/api/User/friendposts/${id}`;
     return this.httpClient.get<PostModel[]>(url).toPromise();
   }
 
-  createUser(id:number, newUser:UserModelCreate){
+  createUser(id: number, newUser: UserModelCreate) {
     const url = `${environment.notTwitterApiBaseUrl}/api/User`;
-    return this.httpClient.post<UserModel>(url, {id, newUser}).toPromise();
+    return this.httpClient.post<UserModel>(url, { id, newUser }).toPromise();
   }
 
-  updateUser(id:number, updatedUser: UserModelUpdate){
+  updateUser(id: number, updatedUser: UserModelUpdate) {
     const url = `${environment.notTwitterApiBaseUrl}/api/User/${id}`;
-    return this.httpClient.put<UserModel>(url, {id,updatedUser}).toPromise();
-}
+    return this.httpClient.put<UserModel>(url, { id, updatedUser }).toPromise();
+  }
 
-  deleteUser(id: number){
+  deleteUser(id: number) {
     const url = `${environment.notTwitterApiBaseUrl}/api/User/${id}`;
     return this.httpClient.delete(url).toPromise();
   }
@@ -87,29 +155,29 @@ export class NotTwitterAPIService {
   Post Controller Functionality
   */
 
-  getPostById(postId: number): Promise<PostModel>{
+  getPostById(postId: number): Promise<PostModel> {
     const url = `${environment.notTwitterApiBaseUrl}/api/Post/${postId}`;
     return this.httpClient.get<PostModel>(url).toPromise();
   }
 
-  getPostByUser(userId: number): Promise<PostModel[]>{
+  getPostByUser(userId: number): Promise<PostModel[]> {
     const url = `${environment.notTwitterApiBaseUrl}/api/Post/user/${userId}`;
     return this.httpClient.get<PostModel[]>(url).toPromise();
   }
-  
-  createPost(authorId: number, content: string){
+
+  createPost(authorId: number, content: string) {
     const url = `${environment.notTwitterApiBaseUrl}/api/Post`;
     //trying adding body of post request as {id, content} if not working, try making a new model PostModelCreate that
     //that exclusively id and content as fields.
-    return this.httpClient.post<PostModel>(url, {authorId, content}).toPromise();
+    return this.httpClient.post<PostModel>(url, { authorId, content }).toPromise();
   }
 
-  updatePost(postId: number, postModel: PostModel){
+  updatePost(postId: number, postModel: PostModel) {
     const url = `${environment.notTwitterApiBaseUrl}/api/Post/${postId}`;
-    return this.httpClient.put<PostModel>(url, {postId, postModel}).toPromise();
+    return this.httpClient.put<PostModel>(url, { postId, postModel }).toPromise();
   }
 
-  deletePost(postId: number){
+  deletePost(postId: number) {
     const url = `${environment.notTwitterApiBaseUrl}/api/Post/${postId}}`;
     return this.httpClient.delete(url).toPromise();
   }
@@ -119,30 +187,30 @@ export class NotTwitterAPIService {
   Comment Controller Functionality
   */
 
-  getCommentById(commentId:number): Promise<CommentModel>{
+  getCommentById(commentId: number): Promise<CommentModel> {
     const url = `${environment.notTwitterApiBaseUrl}/api/Comment/${commentId}`;
     return this.httpClient.get<CommentModel>(url).toPromise();
   }
 
-  getCommentByUserId(userId:number): Promise<CommentModel>{
+  getCommentByUserId(userId: number): Promise<CommentModel> {
     const url = `${environment.notTwitterApiBaseUrl}/api/Comment/user/${userId}`;
     return this.httpClient.get<CommentModel>(url).toPromise();
   }
 
-  createComment(commentModel:CommentCreate){
-    const url = `${environment.notTwitterApiBaseUrl}/api/Comment`;
-    return this.httpClient.post<CommentModel>(url, commentModel).toPromise();
+  createComment(commentModel: CommentCreate) {
+    const url = `${environment.notTwitterApiBaseUrl}/api/Comment/Post`;
+    return this.httpClient.post<CommentCreate>(url, commentModel).toPromise();
   }
 
-  updateComment(commentId: number, commentModel:CommentModel){
+  updateComment(commentId: number, commentModel: CommentModel) {
     const url = `${environment.notTwitterApiBaseUrl}/api/Comment/${commentId}`;
-    return this.httpClient.put<CommentModel>(url, {commentId,commentModel}).toPromise();
+    return this.httpClient.put<CommentModel>(url, { commentId, commentModel }).toPromise();
   }
 
   //API parameters for delete comment seem to require both postId and a postModel. However httpclient.delete only allows for url and options. 
   //Further inspection of delete in comment API it seems that postModel parameter doesnt really get used, so only using postId for deleteComment(postId)
   //might work as intended
-  deleteComment(postId: number){
+  deleteComment(postId: number) {
     const url = `${environment.notTwitterApiBaseUrl}/api/Comment/${postId}`;
     return this.httpClient.delete(url).toPromise();
   }
@@ -151,22 +219,22 @@ export class NotTwitterAPIService {
   FriendRequest controller
   */
 
-  getFriendRequest(userId:number): Promise<FriendRequestModel>{
+  getFriendRequest(userId: number): Promise<FriendRequestModel> {
     const url = `${environment.notTwitterApiBaseUrl}/api/FriendRequest/${userId}`;
     return this.httpClient.get<FriendRequestModel>(url).toPromise();
   }
 
-  createRequest(friendRequest:FriendRequestModel){
+  createRequest(friendRequest: FriendRequestModel) {
     const url = `${environment.notTwitterApiBaseUrl}/api/FriendRequest/Create`;
     return this.httpClient.post<PostModel>(url, friendRequest).toPromise();
   }
 
-  acceptRequest(friendRequest:FriendRequestModel){
+  acceptRequest(friendRequest: FriendRequestModel) {
     const url = `${environment.notTwitterApiBaseUrl}/api/FriendRequest/Accepted`;
     return this.httpClient.patch<FriendRequestModel>(url, friendRequest).toPromise();
   }
 
-  declineRequest(friendRequest:FriendRequestModel){
+  declineRequest(friendRequest: FriendRequestModel) {
     const url = `${environment.notTwitterApiBaseUrl}/api/FriendRequest/Declined`;
     return this.httpClient.post<PostModel>(url, friendRequest).toPromise();
   }

@@ -13,6 +13,7 @@ export class UserComponent implements OnInit {
   users: UserModel[] = null;
   selectedUser: UserModel = null;
   visible:number = 1;
+  
   getUserByName(name:string): void{
    this.NotTwitterApi.getUsersByName(name).then(users => this.users = users);
    this.visible = 1;

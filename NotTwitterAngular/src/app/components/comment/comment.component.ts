@@ -26,7 +26,7 @@ export class CommentComponent implements OnInit {
 
   ngOnInit() {
     this.loadComment();
-    console.log(this.model);
+    console.log("comment loaded?");
   }
 
 

@@ -11,7 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material';
-
+import { CommonModule } from '@angular/common';
 
 
 import { UserComponent } from './components/user/user.component';
@@ -46,6 +46,7 @@ import { SettingsComponent } from './components/settings/settings.component';
     AppRoutingModule,
     HttpClientModule,
     BrowserModule,
+    CommonModule,
 
     BrowserAnimationsModule,
     FormsModule,

@@ -1,8 +1,9 @@
 import CommentModel from './comment-model';
 
 export default interface PostModel{
-    postId:number,
-    userId:number,
+    postID:number,
+    userID:number,
     text:string,
+    timeSent:Date,
     comments:CommentModel[]
 };

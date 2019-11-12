@@ -1,5 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from './auth.service';
+import { NotTwitterAPIService } from './not-twitter-api.service';
+import UserModel from './models/user-model';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -9,12 +12,30 @@ import { AuthService } from './auth.service';
 })
 export class AppComponent implements OnInit {
   
-
-  constructor(private auth: AuthService) {}
+  userSubscription:Subscription;
+  loggedInUser: UserModel = this.notTwit.user;
+  loading: boolean = false;
+  constructor(private auth: AuthService, private notTwit: NotTwitterAPIService) {
+  }
 
   ngOnInit() {
     this.auth.localAuthSetup();
     this.auth.handleAuthCallback();
+    this.userSubscription = this.notTwit.userChanged.subscribe( newUser => 
+      {
+        this.loggedInUser = newUser;
+        console.log("user loaded!!!! from app component");
+      }
+    );
+    //console.log(this.notTwit.user);
+  }
+
+  getLoginUser(){
+    this.loading = true;
+    this.notTwit.user$.subscribe( data => {
+      this.loading = false; // loading is done once the subscription is done
+      this.loggedInUser = data; // populate the loggedinuser with the user data
+    })
   }
 
 }

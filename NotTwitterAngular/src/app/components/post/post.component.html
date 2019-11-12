@@ -1,7 +1,11 @@
-<div class="post" *ngIf="author">
-    <h6>{{author.username}}</h6>
+<div class="post" *ngIf="loggedInUser">
+    <h6>{{loggedInUser.username}}</h6>
     <br>
+
+</div>
+<div *ngIf="model">
     <h2>{{model.text}}</h2>
+    <h6>{{model.timeSent}}</h6>
 </div>
 <div *ngIf="model">
     <ul class="comments">

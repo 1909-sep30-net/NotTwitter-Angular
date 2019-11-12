@@ -11,7 +11,7 @@ import { NotTwitterAPIService } from '../../not-twitter-api.service';
 export class ListPostsComponent implements OnInit {
   
   constructor(public auth: AuthService, private NotTwitterApi: NotTwitterAPIService) { }
-
+  posts: PostModel = null;
   get user (){
     return this.NotTwitterApi.user;
   }
