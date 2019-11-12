@@ -3,7 +3,7 @@ import { NotTwitterAPIService } from 'src/app/not-twitter-api.service';
 import FriendRequestModel from 'src/app/models/friendrequest-model';
 import UserModel from 'src/app/models/user-model';
 import StatusNames from 'src/app/models/status-names';
-import { Subscribable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-friend-request',
