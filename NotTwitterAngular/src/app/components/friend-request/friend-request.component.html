@@ -25,34 +25,28 @@
 
 <h2>Friends Requests: </h2>
 
-<table>
-
-  <tr>
-    <th>Name</th>
-    <th>Status</th>
-    <th>Accept</th>
-    <th>Decline</th>
-  </tr>
-
-  <div *ngFor ="let entry of friendRequests">
-    <div *ngIf = "entry.status == 0 "> 
+<div *ngFor="let entry of statusNames">
+  <div *ngIf="entry.status == 0">
+    <table>
       <tr>
-        <td>  {{entry.senderId}} {{entry.receiverId}}</td>
-        <td>  Pending</td> 
-        <td> <button mat-button (click)="acceptFriendRequest(user.id)">Confirm</button> </td>
-        <td > <button mat-button (click)="declineFriendRequest(user.id)">Decline</button></td>
-    </tr> 
+        <th>Name</th>
+        <th>Status</th>
+        <th></th>
+        <th></th>
+      </tr>
+
+      <tr>
+        <td> {{entry.name}}</td>
+        <td> Pending Response</td>
+        <td> <button mat-button (click)="acceptFriendRequest(entry.id)">Confirm</button> </td>
+        <td> <button mat-button (click)="declineFriendRequest(entry.id)">Decline</button></td>
+      </tr>
+    </table>
   </div>
-  <!-- </div> -->
-    <!-- <tr *ngFor="let friend of friendRequests">         
-        <td>  {{user.firstName}} {{user.lastName}}</td>
-        <td *ngIf = "display">  Pending</td> <td>Resolved</td>
-        <td> <button mat-button (click)="acceptFriendRequest(user.id)">Confirm</button> </td>
-        <td > <button mat-button (click)="declineFriendRequest(user.id)">Decline</button></td>
-    </tr> -->
-  </div>
-  No Requests
-</table>
+</div>
+
+ 
+
 
   
 
