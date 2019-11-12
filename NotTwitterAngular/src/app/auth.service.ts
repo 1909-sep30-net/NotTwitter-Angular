@@ -15,8 +15,7 @@ export class AuthService {
       domain: "nottwitter.auth0.com",
       client_id: "0ys3xb8H4vvUn1W1wPTo0hQ2pnSnSOtz",
       redirect_uri: `${window.location.origin}`,
-      audience: "https://api.nottwiter.com"
-
+      audience: "https://nottwitterapi.azurewebsites.net"
     })
   ) as Observable<Auth0Client>).pipe(
     shareReplay(1), // Every subscription receives the same shared value
@@ -118,10 +117,10 @@ export class AuthService {
       });
     });
   }
+
   getTokenSilently$(options?): Observable<string> {
     return this.auth0Client$.pipe(
       concatMap((client: Auth0Client) => from(client.getTokenSilently(options)))
     );
   }
-
 }

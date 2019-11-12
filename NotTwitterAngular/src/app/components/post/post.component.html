@@ -11,13 +11,13 @@
             </ul>
             <hr>
     </div>
-<div class="input-group-btn">
+<div class="input-group">
     <input #commentInput
     (keyup.enter)="addComment(commentInput.value); commentInput.value=''"
     (blur) = " commentInput.value='' "
     placeholder="Reply....."
     type="text" class="form-control"              
     >
-    <button class="btn btn-success" (click)="addComment(commentInput.value)">Send</button>
+    <button type="submit" class="btn btn-success input-group-addon" (click)="addComment(commentInput.value)">Send</button>
    
 </div>

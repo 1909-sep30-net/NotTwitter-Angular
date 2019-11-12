@@ -5,11 +5,12 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { InterceptorService } from './interceptor.service';
 
 import { AuthGuard } from './auth.guard';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { AppComponent } from './app.component';
 
 const routes: Routes = [
-  { path: ``, 
-    redirectTo: ``, 
-    pathMatch: `full`,
+  { path: `nav`, 
+    component: NavbarComponent,
     canActivate: [AuthGuard] 
   }
 ]

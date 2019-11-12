@@ -7,3 +7,6 @@ body
  background: linear-gradient(rgb(245, 232, 232), rgb(53, 209, 236));
  background-attachment: fixed;
 }
+ li a{
+     cursor: pointer;
+ }
