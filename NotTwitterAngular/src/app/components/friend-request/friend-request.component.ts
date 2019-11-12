@@ -72,7 +72,9 @@ export class FriendRequestComponent implements OnInit {
     this.NotTwitterAPI.declineRequest(this.request);
   }
   
-  constructor(private NotTwitterAPI: NotTwitterAPIService) { }
+  constructor(private NotTwitterAPI: NotTwitterAPIService) { 
+    this.loaded = false;
+  }
 
   ngOnInit() {
     this.loaded = false;

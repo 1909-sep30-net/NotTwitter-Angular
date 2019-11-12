@@ -26,6 +26,8 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { UserProfilePageComponent } from './components/user-profile-page/user-profile-page.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import {MatPaginatorModule} from '@angular/material/paginator';
+
 
 
 
@@ -53,13 +55,14 @@ import { RouterModule } from '@angular/router';
     BrowserModule,
     CommonModule,
     ReactiveFormsModule,
+    MatPaginatorModule,
 
     BrowserAnimationsModule,
     FormsModule,
     MatFormFieldModule,
     MatInputModule,
     RouterModule,
-    MatButtonModule
+    MatButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -50,22 +50,6 @@ export class NotTwitterAPIService {
   //   }));
   // }
 
-  // loadUser(): Observable<UserModel> {
-  //   return this.http.get(apiURL)
-  //       .map(res => {
-  //         return res.json().results.map(item => {
-  //           return new SearchItem(
-  //               item.trackName,
-  //               item.artistName,
-  //               item.trackViewUrl,
-  //               item.artworkUrl30,
-  //               item.artistId
-  //           );
-  //         });
-  //       });
-  // }
-
-
   constructor(
     private httpClient: HttpClient,
     auth: AuthService

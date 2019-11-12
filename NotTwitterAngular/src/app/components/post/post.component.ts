@@ -20,8 +20,14 @@ export class PostComponent implements OnInit {
   myPostId:number = null;
   userSubscription:Subscription;
   content = new FormControl('');
+  maxNumOfComments: number = 3;
   
-  constructor(private notTwitApi:NotTwitterAPIService) { }
+  constructor(private notTwitApi:NotTwitterAPIService) { 
+    this.loggedInUser = null;
+    this.currentUser = null;
+    this.maxNumOfComments = 3;
+
+  }
 
   @Input() model:PostModel;
   @Input() postId:number;
@@ -38,6 +44,9 @@ export class PostComponent implements OnInit {
         this.loadPost();
       }
     );
+    if (this.loggedInUser != null){
+      this.loadPost();
+    }
     //this.loadPost();
   }
 
@@ -50,6 +59,10 @@ export class PostComponent implements OnInit {
   loadPost():void{
     this.notTwitApi.getPostById(this.postId).then(newPost=>this.model = newPost);
 
+  }
+
+  extendList(extendBy:number){
+    this.maxNumOfComments += extendBy;
   }
 
   addComment(content:string):void{

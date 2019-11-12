@@ -1,5 +1,6 @@
 input[type=text] {
-    width: 300px;
+    margin-top: 10px;
+    width: 200px;
     box-sizing: border-box;
     border: 2px solid #ccc;
     border-radius: 4px;
@@ -11,5 +12,9 @@ input[type=text] {
   }
   
   input[type=text]:focus {
-    width: 200%;
+    width: 80%;
+  }
+
+  .btn-info{
+    padding: 20px 20px 20px 5px;
   }

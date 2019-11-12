@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
   userSubscription:Subscription;
   loggedInUser: UserModel = this.notTwit.user;
   loading: boolean = false;
-
+  title:string = "NotTwitterAngular";
   selectedUserId: number; // userid thats for displaying a selected user profile
 
   constructor(private auth: AuthService, private notTwit: NotTwitterAPIService) {
