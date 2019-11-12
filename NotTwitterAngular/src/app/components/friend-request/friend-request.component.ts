@@ -4,6 +4,7 @@ import FriendRequestModel from 'src/app/models/friendrequest-model';
 import UserModel from 'src/app/models/user-model';
 import StatusNames from 'src/app/models/status-names';
 import { Subscription } from 'rxjs';
+import FriendModel from 'src/app/models/friend-model';
 
 @Component({
   selector: 'app-friend-request',
@@ -18,8 +19,9 @@ export class FriendRequestComponent implements OnInit {
   user : UserModel;
   userName: UserModel;
   requestUserModel: UserModel;
-  loggedInUser : UserModel=null;
+  loggedInUser : UserModel = null;
   userSubscription : Subscription;
+  friends: FriendModel[] = null;
 
   statusNames: StatusNames [] = [];
   requestStatus: number [] = [];
@@ -29,11 +31,20 @@ export class FriendRequestComponent implements OnInit {
   request: FriendRequestModel = {senderId : 0, receiverId : 0, status: 0};
   friendRequests: FriendRequestModel [];
 
+  loaded:boolean = false;
+
   //friendRequestStatus = ['Pending Response', 'You are now friends!', 'Declined'];
 
 
   getUserFriends(){
-    this.NotTwitterAPI.getUsersById(this.loggedInUser.id).then(user => this.user = user);
+    console.log(`getting user friends from id: ${this.loggedInUser.id}`);
+    this.NotTwitterAPI.getUsersById(38).then(user => this.user = user).then(()=>this.friends = this.user.friends)
+    .then( ()=>{
+      for (let friend of this.friends){
+        console.log(friend);
+      };
+      this.loaded = true;
+    });
     
   }
 
@@ -64,13 +75,29 @@ export class FriendRequestComponent implements OnInit {
   constructor(private NotTwitterAPI: NotTwitterAPIService) { }
 
   ngOnInit() {
+    this.loaded = false;
+    this.loggedInUser = this.NotTwitterAPI.user;
+    console.log(`loaded on init?: ${this.loaded}`);
+    // this.getUserFriendRequests();
+    // this.getUserFriends();
+
+    console.log(`loggedinuser currently: ${this.loggedInUser}`);
     this.userSubscription = this.NotTwitterAPI.userChanged.subscribe( newUser => 
       {
+        console.log("user loaded from friendrequest");
         this.loggedInUser = newUser;
         this.getUserFriendRequests();
         this.getUserFriends();
       }
     );
+    if (this.loggedInUser != null){
+      this.getUserFriendRequests();
+      this.getUserFriends();
+    }
 
+  }
+  checkLoad(){
+    console.log(this.loggedInUser.username);
+    //console.log(`or is user friend populated: ${this.friends[0].FirstName}`)
   }
 }

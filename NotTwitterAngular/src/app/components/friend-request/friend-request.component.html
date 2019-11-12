@@ -5,48 +5,58 @@
         <input #searchBar matInput  [(ngModel)]='id' name='searchBar' [value]='id' (keyup.enter)='getUserFriends(id)' (keyup.enter)='getUserFriendRequests(id)'>
 </mat-form-field>
      -->
-     <div *ngIf="!loggedInUser">
-        <h2>Loading...</h2>
-      </div>
-      
-      <div *ngIf="loggedInUser">
-        <h2>Friends: </h2>
-      
-        <div *ngIf="user">
-          <table>
+<!-- <button (click)="checkLoad()">uhh are u loaded</button> -->
+
+<!-- <div *ngIf="!loggedInUser">
+    <h2>Loading...</h2>
+</div> -->
+
+
+<!-- <div *ngIf="loggedInUser"> -->
+    <div *ngIf="!loaded">
+        Loading...
+    </div>
+    <div *ngIf="loaded">
+    <h2>Friends: </h2>
+
+        <table>
             <tr>
-              <th>Name</th>
-              <th></th>
-              <th></th>
-            </tr>
-      
-            <tr *ngFor="let friend of user.friends">
-              <td>{{friend.FirstName}} {{friend.LastName}}</td>
-              <td> <button mat-button>Go to Profile</button> </td>
-              <td><button mat-button>Remove friend</button></td>
-            </tr>
-          </table>
-        </div>
-      
-        <h2>Friends Requests: </h2>
-      
-        <div *ngFor="let entry of statusNames">
-          <div *ngIf="entry.status == 1">
-            <table>
-              <tr>
                 <th>Name</th>
-                <th>Status</th>
                 <th></th>
                 <th></th>
-              </tr>
-      
-              <tr>
-                <td> {{entry.name}}</td>
-                <td> Pending Response</td>
-                <td> <button mat-button (click)="acceptFriendRequest(entry.id)">Confirm</button> </td>
-                <td> <button mat-button (click)="declineFriendRequest(entry.id)">Decline</button></td>
-              </tr>
-            </table>
-          </div>
+            </tr>
+
+            <tr *ngFor="let friend of friends">
+                <td>{{friend.firstName}} {{friend.lastName}}</td>
+                <td> <button mat-button>Go to Profile</button> </td>
+                <td><button mat-button>Remove friend</button></td>
+            </tr>
+        </table>
+    </div>
+
+    <h2>Friends Requests: </h2>
+    <div *ngIf="statusNames">
+        <div *ngFor="let entry of statusNames">
+            <div *ngIf="entry.status == 0">
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>Status</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+
+                    <tr>
+                        <td> {{entry.name}}</td>
+                        <td> Pending Response</td>
+                        <td> <button mat-button (click)="acceptFriendRequest(entry.id)">Confirm</button> </td>
+                        <td> <button mat-button (click)="declineFriendRequest(entry.id)">Decline</button></td>
+                    </tr>
+                </table>
+            </div>
         </div>
-      </div>
+    </div>
+
+
+
+<!-- </div> -->
