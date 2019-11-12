@@ -57,7 +57,7 @@ export class NotTwitterAPIService {
   }
 
   getUsersById(id:number): Promise<UserModel>{
-    const url = `${environment.notTwitterApiBaseUrl}/api/User/${this.user.id}`;
+    const url = `${environment.notTwitterApiBaseUrl}/api/User/${id}`;
     return this.httpClient.get<UserModel>(url).toPromise();
   }
 
