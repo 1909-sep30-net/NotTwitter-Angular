@@ -1,1 +1,26 @@
-<p>post works!</p>
+<div class="row">
+    <div class="post" *ngIf="author">
+        <h3>{{author.username}}</h3>
+        <hr/>
+        <h4>{{model.text}}</h4> 
+    </div>
+        <div *ngIf="model">
+            <ul class=".pb-cmnt-textarea">
+                <div class="comSec" *ngFor="let comment of model.comments">
+                    <app-comment [model] = "comment"></app-comment>
+                </div>
+            </ul>
+            <hr>
+            <label>
+                <div class="col-lg-7 col-7">
+                    <input #commentInput
+                        (keyup.enter)="addComment(commentInput.value); commentInput.value=''"
+                        (blur) = " commentInput.value='' "
+                        placeholder="Reply....."
+                        type="text" class="form-control"              
+                    >
+                    <button class="btn btn-danger" (click)="addComment(commentInput.value)">Send</button>
+            </div>
+            </label>
+        </div>        
+</div>

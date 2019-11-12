@@ -18,7 +18,7 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.model.id);
-    this.getUserInfo();
+    //this.getUserInfo();
     //this.NotTwitterApi.getUsersById(37).then(u=>this.user = u)
   }
 
