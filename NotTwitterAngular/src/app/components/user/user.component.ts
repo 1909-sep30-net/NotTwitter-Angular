@@ -14,6 +14,7 @@ export class UserComponent implements OnInit {
   selectedUser: UserModel = null;
   visible:number = 1;
   showingProfile:boolean = false;
+  name:string;
   
   getUserByName(name:string): void{
    this.NotTwitterApi.getUsersByName(name).then(users => this.users = users);

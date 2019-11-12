@@ -3,6 +3,7 @@ import { NotTwitterAPIService } from 'src/app/not-twitter-api.service';
 import FriendRequestModel from 'src/app/models/friendrequest-model';
 import UserModel from 'src/app/models/user-model';
 import StatusNames from 'src/app/models/status-names';
+import { Subscribable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-friend-request',
@@ -17,6 +18,8 @@ export class FriendRequestComponent implements OnInit {
   user : UserModel;
   userName: UserModel;
   requestUserModel: UserModel;
+  loggedInUser : UserModel=null;
+  userSubscription : Subscription;
 
   statusNames: StatusNames [] = [];
   requestStatus: number [] = [];
@@ -30,12 +33,12 @@ export class FriendRequestComponent implements OnInit {
 
 
   getUserFriends(){
-    this.NotTwitterAPI.getUsersById(this.id).then(user => this.user = user);
+    this.NotTwitterAPI.getUsersById(this.loggedInUser.id).then(user => this.user = user);
     
   }
 
   getUserFriendRequests(){
-    this.NotTwitterAPI.getFriendRequest(this.id).then(friendRequest => this.friendRequests = friendRequest)
+    this.NotTwitterAPI.getFriendRequest(this.loggedInUser.id).then(friendRequest => this.friendRequests = friendRequest)
     .then( () => { 
       for (let entry of this.friendRequests) { 
         this.NotTwitterAPI.getUsersById(entry.senderId)
@@ -61,7 +64,13 @@ export class FriendRequestComponent implements OnInit {
   constructor(private NotTwitterAPI: NotTwitterAPIService) { }
 
   ngOnInit() {
-    this.getUserFriendRequests();
-    this.getUserFriends();
+    this.userSubscription = this.NotTwitterAPI.userChanged.subscribe( newUser => 
+      {
+        this.loggedInUser = newUser;
+        this.getUserFriendRequests();
+        this.getUserFriends();
+      }
+    );
+
   }
 }

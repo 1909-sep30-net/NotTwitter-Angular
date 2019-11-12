@@ -43,16 +43,11 @@ export class PostComponent implements OnInit {
 
   ngOnChanges(){
     //console.log(`incoming post id: ${this.model.postID}`);
-    //this.loadPost();
+    this.loadPost();
   }
 
 
   loadPost():void{
-    // this.NotTwitterService.getUsersById(this.model.userId).then(user=>{this.author = user; console.log("user,get")});
-    // this.currentUser = this.NotTwitterService.user;
-    //console.log(`loading post with id: ${this.model.postID}`)
-    //this.myPostId = this.model.postId;
-    //console.log("done loading");
     this.notTwitApi.getPostById(this.postId).then(newPost=>this.model = newPost);
 
   }
