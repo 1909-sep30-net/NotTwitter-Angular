@@ -1,5 +1,5 @@
 li .glyphicon {
-    margin-right: 10px;
+    margin-right: 20px;
 }
 
 /* Highlighting rules for nav menu items */
@@ -9,7 +9,21 @@ li.link-active a:focus {
     background-color: #4189C7;
     color: white;
 }
-
+.navbar-brand{
+    background-image: url('../../../assets/logo.png');
+    background-size: 70%;
+    background-repeat: no-repeat;
+    float: left;
+    height: 175px;
+    padding: 15px 15px;
+    font-size: 18px;
+    line-height: 20px;
+}
+.navbar-inverse {
+    background-color: #222;
+    border-color: #080808;
+    width: 250px;
+}
 /* Keep the nav menu independent of scrolling and on top of other items */
 .main-nav {
     position: fixed;
@@ -19,11 +33,12 @@ li.link-active a:focus {
     z-index: 1;
 }
 
+
 @media (min-width: 768px) {
     /* On small screens, convert the nav menu to a vertical sidebar */
     .main-nav {
         height: 100%;
-        width: calc(25% - 20px);
+        width: 25%;
     }
     .navbar {
         border-radius: 0px;

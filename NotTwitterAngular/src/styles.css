@@ -4,5 +4,6 @@ body
  margin:0 auto;
  padding:0px;
  font-family:"lucida grande",tahoma,verdana,arial,sans-serif;
- background: linear-gradient(white, rgb(235, 180, 180));
+ background: linear-gradient(rgb(245, 232, 232), rgb(53, 209, 236));
+ background-attachment: fixed;
 }

@@ -1,13 +1,8 @@
-
   <div class="fields-container">
-      <h1>{{title}} </h1>
-      <mat-form-field (ngSubmit)='getUserByName($event)' color='primary' id='search-input' appearance='outline'>
-        <mat-label color='red'>Search</mat-label>
-        <input matInput  [(ngModel)]='name' name='searchBar' [value]='name' (keyup.enter)='getUserByName(name)'>
-      </mat-form-field>
-
-      <button mat-raised-button color="primary" (click)='getUserByName(name)' id='submit-search' type='submit' for='searchBar'>Submit</button>
-
+      <form (ngSubmit)='getUserByName($event)' color='primary' id='search-input' >
+        <input  type="text" [(ngModel)]='name' name='searchBar' [value]='name' (keyup.enter)='getUserByName(name)'>
+        <button mat-raised-button color="primary"  class="btn btn-info" (click)='getUserByName(name)' id='submit-search' type='submit' for='searchBar'>Search</button> 
+      </form>
     <div *ngIf = "users && visible == 1">
       <table>
         <tr *ngFor = "let us of users" (click)="selectUser(us)">
