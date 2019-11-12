@@ -10,13 +10,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
-<<<<<<< HEAD
 import { MatInputModule, MatButtonModule } from '@angular/material';
 import { CommonModule } from '@angular/common';
-=======
-import { MatInputModule, MatButtonModule } from '@angular/material';
-
->>>>>>> 528927dba6cc3820ee061557a57ad155cb34ab42
 
 
 import { UserComponent } from './components/user/user.component';
