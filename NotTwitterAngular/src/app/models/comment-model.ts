@@ -1,6 +1,6 @@
-export default interface CommentModel{
+import CommentCreate from './comment-create-model';
+
+export default interface CommentModel extends CommentCreate{
     commentId:number,
-    postId:number,
-    userId:number,
-    content:string,
+    timeSent:Date
 };

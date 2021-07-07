@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output  } from '@angular/core';
 import { AuthService } from '../../auth.service';
 import { NotTwitterAPIService} from '../../not-twitter-api.service';
 import navbarItem from 'src/app/models/navbar-item-model';
+
 
 @Component({
   selector: 'app-navbar',
@@ -11,29 +12,21 @@ import navbarItem from 'src/app/models/navbar-item-model';
 
 export class NavbarComponent implements OnInit {
 
-  selectedPage: navbarItem;
-  pages: navbarItem[] = [
-    {title: "Dashboard"},
-    {title: "Write a Post"},
-    {title: "Friends"},
-    {title: "Settings"},
-    {title: "Log Out"},
-  ]
-
   constructor(
     public auth: AuthService,
-    private apiService: NotTwitterAPIService
+    private NotTwitterApi: NotTwitterAPIService
     ) { }
+    get user() {
+      //console.log(this.NotTwitterApi.user);
+      return this.NotTwitterApi.user;
+    }
 
-  get user() {
-    console.log(this.apiService.user);
-    return this.apiService.user;
-  }
+    selectedPage:number;
+    SelectPage(page:number){
+      this.selectedPage = page;
+      console.log(this.selectedPage);
+    }
 
-  onSelect(page:navbarItem){
-    this.selectedPage = page;
-    console.log(this.selectedPage.title);
-  }
 
   ngOnInit() {
   }

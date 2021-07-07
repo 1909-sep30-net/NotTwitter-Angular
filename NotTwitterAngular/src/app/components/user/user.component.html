@@ -1,51 +1,29 @@
+  <div class="fields-container">
+      <form (ngSubmit)='getUserByName($event)' color='primary' id='search-input' >
+        <input  type="text" [(ngModel)]='name' name='searchBar' [value]='name' (keyup.enter)='getUserByName(name)'>
+        <button mat-raised-button color="primary"  class="btn btn-info" (click)='getUserByName(name)' id='submit-search' type='submit' for='searchBar'>Search</button> 
+      </form>
+    <div *ngIf = "users && visible == 1">
+      <table>
+        <tr *ngFor = "let us of users" (click)="selectUser(us)">
+          <td>{{us.username}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
 
-<h1>{{title}} </h1>
+  <div *ngIf="selectedUser && visible ==0">
+    <!-- user profile component -->
+    <app-user-profile [model]="selectedUser"></app-user-profile>
+  </div>
 
-<mat-form-field (ngSubmit)='getUserByName($event)' color='primary' id='search-input' class='full-width' appearance='outline'>
-  <mat-label color='red'>Search</mat-label>
-  <input #searchBar matInput  [(ngModel)]='name' name='searchBar' [value]='name' (keyup.enter)='getUserByName(name)'>
-</mat-form-field>
 
-<!-- <div class="fields-container">
-  <mat-form-field>
-    <input matInput placeholder="Input">
-  </mat-form-field>
-</div> -->
+  <!-- 
+  <form #f="ngForm" (ngSubmit)="getUserByName(f)" novalidate>
+    <input name="first" ngModel required #first="ngModel">
+    <button>Submit</button>
+  </form> -->
 
-<button mat-raised-button color="primary" (click)='getUserByName(name)' id='submit-search' type='submit' for='searchBar'>Submit</button>
-
-<!-- 
-<form #f="ngForm" (ngSubmit)="getUserByName(f)" novalidate>
-  <input name="first" ngModel required #first="ngModel">
-  <button>Submit</button>
-</form> -->
-
-<!-- <h1 (click)="getUserByName(name)">clickmeinstead</h1>
-<h1>Users with name {{name}}</h1> -->
-
-<h3>List of Users: </h3>
-<div *ngIf = "users">
-<table>
-  <tr>
-    <th>id</th>
-    <th>firstName</th>
-    <th>lastName</th>
-    <th>username</th>
-    <th>password</th>
-    <th>email</th>
-    <th>gender</th>
-  </tr>
-
-  <tr *ngFor = "let us of users">
-    <td>{{us.id}}</td>
-    <td>{{us.firstName}}</td>
-    <td>{{us.lastName}}</td>
-    <td>{{us.username}}</td>
-    <td>{{us.password}}</td>
-    <td>{{us.email}}</td>
-    <td>{{us.gender}}</td>
-  </tr>
-</table>
-</div>
-
+  <!-- <h1 (click)="getUserByName(name)">clickmeinstead</h1>
+  <h1>Users with name {{name}}</h1> -->
 

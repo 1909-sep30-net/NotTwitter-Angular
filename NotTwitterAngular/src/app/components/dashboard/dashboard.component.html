@@ -1,0 +1,14 @@
+<div class="dashboard" *ngIf="loaded && user">
+    <h1>Welcome Back {{user.username}}</h1>
+    <hr>
+    <ul *ngIf="posts">
+        <div *ngFor="let post of posts">
+            <app-post [model]="post"></app-post>
+            <br>
+        </div>
+        <div *ngFor="let friend of friends">
+            <p>{{friend.username}}</p>
+        </div>
+    </ul>
+</div>
+

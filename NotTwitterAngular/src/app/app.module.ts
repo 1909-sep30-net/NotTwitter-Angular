@@ -18,6 +18,11 @@ import { UserComponent } from './components/user/user.component';
 import { PostComponent } from './components/post/post.component';
 import { FriendRequestComponent } from './components/friend-request/friend-request.component';
 import { CommentComponent } from './components/comment/comment.component';
+import { ListFriendsComponent } from './components/list-friends/list-friends.component';
+import { ListPostsComponent } from './components/list-posts/list-posts.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { SettingsComponent } from './components/settings/settings.component';
 
 
 // /import { FridgeComponent } from './fridge/fridge.component';
@@ -31,6 +36,11 @@ import { CommentComponent } from './components/comment/comment.component';
     PostComponent,
     CommentComponent,
     FriendRequestComponent,
+    ListFriendsComponent,
+    ListPostsComponent,
+    UserProfileComponent,
+    DashboardComponent,
+    SettingsComponent,
   ],
   imports: [
     AppRoutingModule,
